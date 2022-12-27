@@ -19,7 +19,7 @@ public class MoveControl : MonoBehaviour
     {
         if(MoveControlItem.isOn)
         {
-            var pos = new Vector2(Input.mousePosition.x / Screen.width, Input.mousePosition.y / Screen.height);
+            var pos = new Vector2((Input.mousePosition.x - Screen.width*0.5f) / Screen.width, (Input.mousePosition.y - Screen.height * 0.5f) / Screen.height);
             moveEvent?.Invoke(pos);
 
             Debug.Log($"move control {pos}");
