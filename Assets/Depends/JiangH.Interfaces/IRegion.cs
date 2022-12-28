@@ -9,7 +9,19 @@ namespace JiangH.Interfaces
         public string name { get; }
         string image { get; }
 
-        ISect sect { get; set; }
+        SectInfo sectInfo { get; set; }
+
+        public class SectInfo
+        {
+            public ISect sect { get; }
+            public bool isSectLocation { get; set; }
+
+            public SectInfo(ISect sect)
+            {
+                this.sect = sect;
+                this.isSectLocation = false;
+            }
+        }
     }
 
     public interface ITerrainMap : IEnumerable<KeyValuePair<Coordinate, TerrainType>>
@@ -19,4 +31,6 @@ namespace JiangH.Interfaces
 
         //TerrainType this[Coordinate coord] { get;set; }
     }
+
+
 }

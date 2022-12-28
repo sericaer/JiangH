@@ -28,14 +28,15 @@ namespace JiangH.Sessions
 
             private static void BuildRelationSect2Reigions(IEnumerable<ISect> sects, IEnumerable<IRegion> regions)
             {
-                Sect.funcGetRegions = (sect) => regions.Where(x => x.sect == sect);
+                Sect.funcGetRegions = (sect) => regions.Where(x => x.sectInfo.sect == sect);
 
                 Random random = new Random();
                 var regionStack = new Queue<IRegion>(regions.OrderBy(_ => random.Next(0, int.MaxValue)));
                 foreach (var sect in sects)
                 {
                     var region = regionStack.Dequeue();
-                    region.sect = sect;
+                    region.sectInfo = new IRegion.SectInfo(sect);
+                    region.sectInfo.isSectLocation = true;
                 }
             }
         }

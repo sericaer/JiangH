@@ -7,6 +7,7 @@ using UnityEngine.UI;
 class RegionItem : MonoBehaviour
 {
     public Text text;
+    public SectPanel sectPanel;
 
     public static Func<Coordinate, Vector3> CoordToWord { get; set; }
 
@@ -25,5 +26,10 @@ class RegionItem : MonoBehaviour
     }
 
     private IRegion _gmData;
+
+    void Update()
+    {
+        sectPanel.gmData = _gmData.sectInfo;
+    }
 
 }

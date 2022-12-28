@@ -15,12 +15,12 @@ namespace JiangH.Regions
 
         public string image { get; }
 
-        public ISect sect { get; set; }
+        public IRegion.SectInfo sectInfo { get; set; }
 
         public Region(Coordinate coordinate, TerrainType value)
         {
             this.coordinate = coordinate;
-            this.name = $"({coordinate.x}, {coordinate.y})";
+            this.name = $"REGIN({coordinate.x}, {coordinate.y})";
         }
     }
 }
