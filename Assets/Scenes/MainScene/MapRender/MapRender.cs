@@ -22,7 +22,15 @@ class MapRender : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        var session = Session.Builder.Build();
+        var gmInit = new GMInit()
+        {
+            mapHeight = 21,
+            mapWidth = 31,
+            regionCount = 30,
+            sectCount = 10
+        };
+
+        var session = Session.Builder.Build(gmInit);
 
         terrainMap.gmData = session.terrainMap;
         mapUIContainer.gmData = session.regions;

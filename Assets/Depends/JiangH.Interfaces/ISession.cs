@@ -50,7 +50,13 @@ namespace JiangH.Interfaces
         {
             return HashCode.Combine(x, y);
         }
+    }
 
-       
+    public class GMInit
+    {
+        public int mapWidth { get; internal set; }
+        public int mapHeight { get; internal set; }
+        public int regionCount { get; internal set; }
+        public int sectCount { get; internal set; }
     }
 }
