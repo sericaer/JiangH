@@ -15,6 +15,8 @@ namespace JiangH.Regions
 
         public string image { get; }
 
+        public ISect sect { get; set; }
+
         public Region(Coordinate coordinate, TerrainType value)
         {
             this.coordinate = coordinate;

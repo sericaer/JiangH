@@ -11,6 +11,8 @@ namespace JiangH.Interfaces
         Dictionary<Coordinate, TerrainType> dictTerrains { get; }
 
         IEnumerable<IRegion> regions { get; }
+
+        IEnumerable<ISect> sects { get; }
     }
 
     public enum TerrainType

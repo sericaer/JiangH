@@ -6,5 +6,7 @@
 
         public string name { get; }
         string image { get; }
+
+        ISect sect { get; set; }
     }
 }

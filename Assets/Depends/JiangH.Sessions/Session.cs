@@ -12,5 +12,8 @@ namespace JiangH.Sessions
         public Dictionary<Coordinate, TerrainType> dictTerrains { get; private set; }
 
         public IEnumerable<IRegion> regions { get; private set; }
+
+        public IEnumerable<ISect> sects { get; private set; }
+
     }
 }
