@@ -6,6 +6,7 @@ class MainScene : MonoBehaviour
 {
     public MapRender mapRender;
     public DateControl dateControl;
+    public SectTable sectTable;
 
     private ISession session;
 
@@ -24,6 +25,8 @@ class MainScene : MonoBehaviour
 
     private void Start()
     {
+        sectTable.gmData = session.sects;
+
         mapRender.SetSession(session);
         dateControl.SetSession(session);
     }
