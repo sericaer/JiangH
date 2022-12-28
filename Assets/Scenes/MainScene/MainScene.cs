@@ -5,6 +5,7 @@ using UnityEngine;
 class MainScene : MonoBehaviour
 {
     public MapRender mapRender;
+    public DateControl dateControl;
 
     private ISession session;
 
@@ -19,11 +20,11 @@ class MainScene : MonoBehaviour
         };
 
         session = Session.Builder.Build(gmInit);
-        
     }
 
     private void Start()
     {
         mapRender.SetSession(session);
+        dateControl.SetSession(session);
     }
 }

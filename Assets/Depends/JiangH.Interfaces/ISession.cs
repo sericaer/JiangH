@@ -8,6 +8,7 @@ namespace JiangH.Interfaces
 {
     public interface ISession
     {
+        IDate date { get; }
         ITerrainMap terrainMap { get; }
 
         IEnumerable<IRegion> regions { get; }

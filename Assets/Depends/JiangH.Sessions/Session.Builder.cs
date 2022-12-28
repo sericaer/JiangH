@@ -1,4 +1,5 @@
-﻿using JiangH.Interfaces;
+﻿using JiangH.Dates;
+using JiangH.Interfaces;
 using JiangH.Regions;
 using JiangH.Sects;
 using System;
@@ -14,6 +15,8 @@ namespace JiangH.Sessions
             public static ISession Build(GMInit gmInit)
             {
                 var session = new Session();
+
+                session.date = new Date();
 
                 session.terrainMap = JiangH.Maps.TerrainMap.Builder.Build(gmInit.mapHeight, gmInit.mapWidth);
 
