@@ -19,19 +19,8 @@ class MapRender : MonoBehaviour
         RegionItem.CoordToWord = (coord) => terrainMap.tilemap.CellToWorld(new Vector3Int(coord.x, coord.y));
     }
 
-    // Start is called before the first frame update
-    void Start()
+    internal void SetSession(ISession session)
     {
-        var gmInit = new GMInit()
-        {
-            mapHeight = 21,
-            mapWidth = 31,
-            regionCount = 30,
-            sectCount = 10
-        };
-
-        var session = Session.Builder.Build(gmInit);
-
         terrainMap.gmData = session.terrainMap;
         mapUIContainer.gmData = session.regions;
 
