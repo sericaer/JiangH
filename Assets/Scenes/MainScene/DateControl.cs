@@ -18,4 +18,9 @@ class DateControl : MonoBehaviour
     {
         date.text = $"{session.date.year}-{session.date.month}-{session.date.day}";
     }
+
+    public void OnTimeInc()
+    {
+        session.date.day++;
+    }
 }

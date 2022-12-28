@@ -1186,7 +1186,19 @@ MonoBehaviour:
   speedPause: {fileID: 1389879752}
   timeIncEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 554076254}
+        m_TargetAssemblyTypeName: DateControl, Assembly-CSharp
+        m_MethodName: OnTimeInc
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &904319966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1423,7 +1435,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapRender: {fileID: 1884075129}
-  dateControl: {fileID: 0}
+  dateControl: {fileID: 554076254}
 --- !u!4 &996743815
 Transform:
   m_ObjectHideFlags: 0
