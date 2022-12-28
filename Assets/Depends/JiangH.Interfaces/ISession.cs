@@ -8,8 +8,6 @@ namespace JiangH.Interfaces
 {
     public interface ISession
     {
-        Dictionary<Coordinate, TerrainType> dictTerrains { get; }
-
         ITerrainMap terrainMap { get; }
 
         IEnumerable<IRegion> regions { get; }

@@ -9,7 +9,6 @@ namespace JiangH.Sessions
 {
     partial class Session : ISession
     {
-        public Dictionary<Coordinate, TerrainType> dictTerrains { get; private set; }
 
         public ITerrainMap terrainMap { get; private set; }
         public IEnumerable<IRegion> regions { get; private set; }
