@@ -14,7 +14,7 @@ class TerrainMap : MonoBehaviour
         { TerrainType.Mount, new Color(128 / 255f, 0, 128 / 255f)}
     };
 
-    public Dictionary<Coordinate, TerrainType> gmData
+    public ITerrainMap gmData
     {
         get
         {
@@ -26,12 +26,12 @@ class TerrainMap : MonoBehaviour
 
             tilemap.ClearAllTiles();
 
-            foreach (var key in _gmData.Keys)
+            foreach (var pair in _gmData)
             {
-                tilemap.SetTileColor(new Vector3Int(key.x, key.y), colors[_gmData[key]]);
+                tilemap.SetTileColor(new Vector3Int(pair.Key.x, pair.Key.y), colors[pair.Value]);
             }
         }
     }
 
-    private Dictionary<Coordinate, TerrainType> _gmData;
+    private ITerrainMap _gmData;
 }

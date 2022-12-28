@@ -14,21 +14,17 @@ namespace JiangH.Sessions
             public static ISession Build()
             {
 
-                Random random = new Random();
-
-                Array values = Enum.GetValues(typeof(TerrainType));
-
                 var session = new Session();
-                session.dictTerrains = Enumerable.Range(-10, 21)
-                    .SelectMany(x => Enumerable.Range(-10, 21).Select(y => new Coordinate(x, y)))
-                    .ToDictionary(k => k, v => (TerrainType)values.GetValue(random.Next(values.Length)));
 
-                session.regions = Region.Builder.BuildCollection(session.dictTerrains);
+                session.terrainMap = JiangH.Maps.TerrainMap.Builder.Build(21, 21);
+
+                session.regions = Region.Builder.BuildCollection(session.terrainMap, 10);
 
                 session.sects = Sect.Builder.BuildCollection(session.regions.Count()/2);
 
                 Sect.funcGetRegions = (sect) => session.regions.Where(x => x.sect == sect);
 
+                Random random = new Random();
                 var regionStack = new Queue<IRegion>(session.regions.OrderBy(_ => random.Next(0, int.MaxValue)));
                 foreach (var sect in session.sects)
                 {

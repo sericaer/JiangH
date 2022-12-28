@@ -24,7 +24,7 @@ class MapRender : MonoBehaviour
     {
         var session = Session.Builder.Build();
 
-        terrainMap.gmData = session.dictTerrains;
+        terrainMap.gmData = session.terrainMap;
         mapUIContainer.gmData = session.regions;
 
         mapCamera.MoveTo(new Coordinate(3, 3));

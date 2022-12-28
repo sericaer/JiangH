@@ -9,7 +9,7 @@ namespace JiangH.Regions
     {
         public static class Builder
         {
-            internal static IEnumerable<IRegion> BuildCollection(Dictionary<Coordinate, TerrainType> dictTerrains)
+            internal static IEnumerable<IRegion> BuildCollection(ITerrainMap terrainMap, int count)
             {
                 //var lookup = dictTerrains.ToLookup(x => x.Value);
                 //lookup[TerrainType.Plain].Count();
@@ -22,10 +22,10 @@ namespace JiangH.Regions
                 //coord = new Coordinate(3, 2);
                 //rslt.Add(new Region(coord, dictTerrains[coord]));
 
-                var list = dictTerrains.ToList();
+                var list = terrainMap.ToList();
 
                 Random random = new Random();
-                for (int i = 0; i < list.Count / 100; i++)
+                for (int i = 0; i < count; i++)
                 {
                     var index = random.Next(0, list.Count);
                     var pair = list.ElementAt(index);

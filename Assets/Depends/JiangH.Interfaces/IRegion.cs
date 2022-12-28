@@ -1,4 +1,6 @@
-﻿namespace JiangH.Interfaces
+﻿using System.Collections.Generic;
+
+namespace JiangH.Interfaces
 {
     public interface IRegion
     {
@@ -8,5 +10,13 @@
         string image { get; }
 
         ISect sect { get; set; }
+    }
+
+    public interface ITerrainMap : IEnumerable<KeyValuePair<Coordinate, TerrainType>>
+    {
+        int height { get; }
+        int width { get; }
+
+        //TerrainType this[Coordinate coord] { get;set; }
     }
 }
