@@ -25,7 +25,7 @@ namespace JiangH.Sessions
 
                 session.entities.AddRange(Sect.Builder.BuildCollection(gmInit.sectCount));
 
-                BuildRelationSect2Reigions(session.sects, session.regions);
+                BuildRelationSect2Reigions(session);
 
                 session.systems.AddRange(BuildSystems(session.entities));
 
@@ -67,17 +67,16 @@ namespace JiangH.Sessions
                 return systems;
             }
 
-            private static void BuildRelationSect2Reigions(IEnumerable<ISect> sects, IEnumerable<IRegion> regions)
+            private static void BuildRelationSect2Reigions(Session session)
             {
-                Sect.funcGetRegions = (sect) => regions.Where(x => x.sectInfo != null && x.sectInfo.sect == sect);
-
                 Random random = new Random();
-                var regionStack = new Queue<IRegion>(regions.OrderBy(_ => random.Next(0, int.MaxValue)));
-                foreach (var sect in sects)
+                var regionStack = new Queue<IRegion>(session.regions.OrderBy(_ => random.Next(0, int.MaxValue)));
+                foreach (var sect in session.sects)
                 {
                     var region = regionStack.Dequeue();
-                    region.sectInfo = new IRegion.SectInfo(sect);
-                    region.sectInfo.isSectLocation = true;
+
+                    session.relationDB.AddRelation(region as IEntity, sect as IEntity, IRelation.Label.Owner);
+                    session.relationDB.AddRelation(region as IEntity, sect as IEntity, IRelation.Label.Location);
                 }
             }
         }

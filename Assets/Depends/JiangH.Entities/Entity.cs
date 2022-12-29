@@ -10,5 +10,7 @@ namespace JiangH.Entities
     public abstract class Entity : IEntity
     {
         public List<IComponent> components { get; } = new List<IComponent>();
+
+        public List<IRelation> relations { get; } = new List<IRelation>();
     }
 }

@@ -5,17 +5,17 @@ using UnityEngine.UI;
 class SectPanel : MonoBehaviour
 {
     public Text text;
-    public IRegion.SectInfo gmData { get; set; }
+    public ISect gmData { get; set; }
 
     public void Update()
     {
-        if (gmData == null || !gmData.isSectLocation)
+        if (gmData == null)
         {
             text.gameObject.SetActive(false);
             return;
         }
 
         text.gameObject.SetActive(true);
-        text.text = gmData.sect.name;
+        text.text = gmData.name;
     }
 }

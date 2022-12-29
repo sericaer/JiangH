@@ -29,7 +29,7 @@ class RegionItem : MonoBehaviour
 
     void Update()
     {
-        sectPanel.gmData = _gmData.sectInfo;
+        sectPanel.gmData = _gmData.sect;
     }
 
 }

@@ -11,36 +11,18 @@ namespace JiangH.Sects
     partial class Sect : Entity, ISect
     {
         public static Random random = new Random();
-
-        public static Func<ISect, IEnumerable<IRegion>> funcGetRegions { get; set; }
-
         public string name { get; set; }
-        public IEnumerable<IRegion> regions => funcGetRegions(this);
+
         public ITreasury treasury => components.OfType<ITreasury>().Single();
 
-        public IRegion location
-        {
-            get 
-            { 
-                return regions.Single(x => x.sectInfo != null && x.sectInfo.isSectLocation); 
-            }
-            set
-            {
-                if(!regions.Contains(value))
-                {
-                    throw new Exception();
-                }
+        public IEnumerable<IRegion> regions => relations.Where(x => x.label == IRelation.Label.Owner)
+            .Select(x => x.getPeer(this))
+            .OfType<IRegion>();
 
-                var old = regions.Single(x => x.sectInfo != null && x.sectInfo.isSectLocation);
-                if(old == value)
-                {
-                    return;
-                }
-
-                old.sectInfo.isSectLocation = false;
-                value.sectInfo.isSectLocation = true;
-            }
-        }
+        public IRegion location => relations.Where(x => x.label == IRelation.Label.Location)
+            .Select(x => x.getPeer(this))
+            .OfType<IRegion>()
+            .Single();
 
         public Sect(string name)
         {

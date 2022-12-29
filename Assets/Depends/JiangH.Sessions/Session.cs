@@ -1,6 +1,8 @@
 ﻿using JiangH.Dates;
 using JiangH.Interfaces;
 using JiangH.Messages;
+using JiangH.Relations;
+using JiangH.Sects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,8 +21,11 @@ namespace JiangH.Sessions
         private List<IEntity> entities { get; } = new List<IEntity>();
         private List<ISystem> systems { get; } = new List<ISystem>();
 
+        private RelationDataBase relationDB { get; } = new RelationDataBase();
+
         private MessageBus messageBus { get; } = new MessageBus();
     }
+
 
     class TreasurySystem : MessageInOut, ISystem
     {
