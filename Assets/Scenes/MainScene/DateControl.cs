@@ -21,6 +21,6 @@ class DateControl : MonoBehaviour
 
     public void OnTimeInc()
     {
-        session.date.day++;
+        session.date.DaysInc();
     }
 }

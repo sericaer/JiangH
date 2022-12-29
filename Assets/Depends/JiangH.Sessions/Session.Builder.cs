@@ -26,7 +26,10 @@ namespace JiangH.Sessions
 
                 BuildRelationSect2Reigions(session.sects, session.regions);
 
-                session.date.OnDaysInc = session.OnDaysInc;
+                session.treasuaryMgr.items = session.sects.Select(x => x.treasury);
+
+                session.messageBus.Register((Date)session.date);
+                session.messageBus.Register(session.treasuaryMgr);
 
                 return session;
             }

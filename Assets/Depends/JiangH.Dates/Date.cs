@@ -1,9 +1,10 @@
 ﻿using JiangH.Interfaces;
+using JiangH.Messages;
 using System;
 
 namespace JiangH.Dates
 {
-    public class Date : IDate
+    public class Date : MessageOut, IDate
     {
         public int year
         {
@@ -11,7 +12,7 @@ namespace JiangH.Dates
             {
                 return _year;
             }
-            set
+            private set
             {
                 _year = value;
             }
@@ -23,7 +24,7 @@ namespace JiangH.Dates
             {
                 return _month;
             }
-            set
+            private set
             {
                 _month = value;
                 if (_month > 12)
@@ -40,7 +41,7 @@ namespace JiangH.Dates
             {
                 return _day;
             }
-            set
+            private set
             {
                 if(_day == value)
                 {
@@ -53,12 +54,8 @@ namespace JiangH.Dates
                     month += 1;
                     _day = 1;
                 }
-
-                OnDaysInc?.Invoke(year, month, day);
             }
         }
-
-        public Action<int, int, int> OnDaysInc { get; set; }
 
         private int _year;
         private int _month;
@@ -69,6 +66,18 @@ namespace JiangH.Dates
             year = 1;
             month = 1;
             day = 1;
+        }
+
+        public void DaysInc()
+        {
+            day++;
+
+            SendMessage(new MESSAGE_DATE_INC()
+            {
+                day = this.day,
+                month = this.month,
+                year = this.year
+            });
         }
     }
 }

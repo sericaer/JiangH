@@ -4,11 +4,11 @@ namespace JiangH.Interfaces
 {
     public interface IDate
     {
-        int year { get; set; }
-        int month { get; set; }
-        int day { get; set; }
+        int year { get; }
+        int month { get; }
+        int day { get;}
 
-        Action<int, int, int> OnDaysInc { get; set; }
+        void DaysInc();
     }
 
 }

@@ -4,7 +4,7 @@ namespace JiangH.Interfaces
 {
     public interface ITreasury
     {
-        int current { get; }
+        int current { get; set; }
         int surplus { get; }
 
         IEnumerable<IIncomeItem> incomeItems { get; }
