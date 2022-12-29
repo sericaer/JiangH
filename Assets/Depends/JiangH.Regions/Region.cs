@@ -1,4 +1,5 @@
-﻿using JiangH.Interfaces;
+﻿using JiangH.Entities;
+using JiangH.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace JiangH.Regions
 {
-    partial class Region : IRegion
+    partial class Region : Entity, IRegion
     {
         public Coordinate coordinate { get; }
 

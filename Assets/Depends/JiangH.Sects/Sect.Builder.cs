@@ -7,9 +7,9 @@ namespace JiangH.Sects
     {
         public static class Builder
         {
-            public static IEnumerable<ISect> BuildCollection(int count)
+            public static IEnumerable<Sect> BuildCollection(int count)
             {
-                var rslt = new List<ISect>();
+                var rslt = new List<Sect>();
                 for(int i=0; i<count; i++)
                 {
                     rslt.Add(new Sect($"SECT{i}"));

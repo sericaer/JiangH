@@ -1,5 +1,6 @@
 ﻿using JiangH.Dates;
 using JiangH.Interfaces;
+using JiangH.Messages.Interfaces;
 using JiangH.Regions;
 using JiangH.Sects;
 using System;
@@ -20,18 +21,50 @@ namespace JiangH.Sessions
 
                 session.terrainMap = JiangH.Maps.TerrainMap.Builder.Build(gmInit.mapHeight, gmInit.mapWidth);
 
-                session.regions = Region.Builder.BuildCollection(session.terrainMap, gmInit.regionCount);
+                session.entities.AddRange(Region.Builder.BuildCollection(session.terrainMap, gmInit.regionCount));
 
-                session.sects = Sect.Builder.BuildCollection(gmInit.sectCount);
+                session.entities.AddRange(Sect.Builder.BuildCollection(gmInit.sectCount));
 
                 BuildRelationSect2Reigions(session.sects, session.regions);
 
-                session.treasuaryMgr.items = session.sects.Select(x => x.treasury);
+                session.systems.AddRange(BuildSystems(session.entities));
 
-                session.messageBus.Register((Date)session.date);
-                session.messageBus.Register(session.treasuaryMgr);
+                RegisterMessages(session);
 
                 return session;
+            }
+
+            private static void RegisterMessages(Session session)
+            {
+                session.messageBus.Register((Date)session.date);
+
+                foreach(var system in session.systems)
+                {
+                    if(system is IMessageInOut)
+                    {
+                        session.messageBus.Register((IMessageInOut)system);
+                    }
+                    else if(system is IMessageIn)
+                    {
+                        session.messageBus.Register((IMessageIn)system);
+                    }
+                    else if (system is IMessageOut)
+                    {
+                        session.messageBus.Register((IMessageInOut)system);
+                    }
+                }
+            }
+
+            private static List<ISystem> BuildSystems(List<IEntity> entities)
+            {
+                var systems = new List<ISystem>();
+
+                var treasurySys = new TreasurySystem();
+                treasurySys.items = entities.SelectMany(x => x.components).OfType<ITreasury>();
+
+                systems.Add(treasurySys);
+
+                return systems;
             }
 
             private static void BuildRelationSect2Reigions(IEnumerable<ISect> sects, IEnumerable<IRegion> regions)

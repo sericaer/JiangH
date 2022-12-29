@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace JiangH.Sects
 {
-    class Treasury : ITreasury
+    class Treasury : IComponent, ITreasury
     {
         public int current { get; set; }
 

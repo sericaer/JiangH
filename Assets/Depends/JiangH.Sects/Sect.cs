@@ -1,4 +1,5 @@
-﻿using JiangH.Interfaces;
+﻿using JiangH.Entities;
+using JiangH.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace JiangH.Sects
 {
-    partial class Sect : ISect
+    partial class Sect : Entity, ISect
     {
         public static Random random = new Random();
 
@@ -15,7 +16,7 @@ namespace JiangH.Sects
 
         public string name { get; set; }
         public IEnumerable<IRegion> regions => funcGetRegions(this);
-        public ITreasury treasury { get; }
+        public ITreasury treasury => components.OfType<ITreasury>().Single();
 
         public IRegion location
         {
@@ -71,12 +72,7 @@ namespace JiangH.Sects
                 })
             };
 
-            this.treasury = new Treasury(random.Next(30, 100), incomeItems, spendItems);
-        }
-
-        public void OnDaysInc(int year, int month, int day)
-        {
-            treasury.OnDaysInc(year, month, day);
+            this.components.Add(new Treasury(random.Next(30, 100), incomeItems, spendItems));
         }
     }
 }

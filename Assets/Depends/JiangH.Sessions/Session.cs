@@ -13,26 +13,20 @@ namespace JiangH.Sessions
     {
         public IDate date { get; private set; }
         public ITerrainMap terrainMap { get; private set; }
-        public IEnumerable<IRegion> regions { get; private set; }
-        public IEnumerable<ISect> sects { get; private set; }
+        public IEnumerable<IRegion> regions => entities.OfType<IRegion>();
+        public IEnumerable<ISect> sects => entities.OfType<ISect>();
 
-        private TreasuryMgr treasuaryMgr { get; } = new TreasuryMgr();
+        private List<IEntity> entities { get; } = new List<IEntity>();
+        private List<ISystem> systems { get; } = new List<ISystem>();
+
         private MessageBus messageBus { get; } = new MessageBus();
-
-        public void OnDaysInc(int year, int month, int day)
-        {
-            foreach(var sect in sects)
-            {
-                sect.OnDaysInc(year, month, day);
-            }
-        }
     }
 
-    class TreasuryMgr : MessageInOut
+    class TreasurySystem : MessageInOut, ISystem
     {
         public IEnumerable<ITreasury> items { get; set; }
 
-        public TreasuryMgr()
+        public TreasurySystem()
         {
             RegisterMsg<MESSAGE_DATE_INC>(OnMessageDateInc);
         }

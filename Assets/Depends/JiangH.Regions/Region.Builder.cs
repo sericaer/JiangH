@@ -9,12 +9,12 @@ namespace JiangH.Regions
     {
         public static class Builder
         {
-            internal static IEnumerable<IRegion> BuildCollection(ITerrainMap terrainMap, int count)
+            internal static IEnumerable<Region> BuildCollection(ITerrainMap terrainMap, int count)
             {
                 //var lookup = dictTerrains.ToLookup(x => x.Value);
                 //lookup[TerrainType.Plain].Count();
 
-                var rslt = new List<IRegion>();
+                var rslt = new List<Region>();
 
                 //var coord = new Coordinate(0, 0);
                 //rslt.Add(new Region(coord, dictTerrains[coord]));

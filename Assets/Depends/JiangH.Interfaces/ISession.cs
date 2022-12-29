@@ -13,8 +13,6 @@ namespace JiangH.Interfaces
         IEnumerable<IRegion> regions { get; }
         IEnumerable<ISect> sects { get; }
 
-        void OnDaysInc(int year, int month, int day);
-
     }
 
     public enum TerrainType
