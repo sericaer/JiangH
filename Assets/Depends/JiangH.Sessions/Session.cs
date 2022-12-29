@@ -14,5 +14,12 @@ namespace JiangH.Sessions
         public IEnumerable<IRegion> regions { get; private set; }
         public IEnumerable<ISect> sects { get; private set; }
 
+        public void OnDaysInc(int year, int month, int day)
+        {
+            foreach(var sect in sects)
+            {
+                sect.OnDaysInc(year, month, day);
+            }
+        }
     }
 }

@@ -10,5 +10,7 @@ namespace JiangH.Interfaces
         IRegion location { get; set; }
 
         ITreasury treasury { get; }
+
+        void OnDaysInc(int year, int month, int day);
     }
 }

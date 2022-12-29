@@ -73,5 +73,10 @@ namespace JiangH.Sects
 
             this.treasury = new Treasury(random.Next(30, 100), incomeItems, spendItems);
         }
+
+        public void OnDaysInc(int year, int month, int day)
+        {
+            treasury.OnDaysInc(year, month, day);
+        }
     }
 }

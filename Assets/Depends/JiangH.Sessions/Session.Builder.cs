@@ -26,6 +26,8 @@ namespace JiangH.Sessions
 
                 BuildRelationSect2Reigions(session.sects, session.regions);
 
+                session.date.OnDaysInc = session.OnDaysInc;
+
                 return session;
             }
 

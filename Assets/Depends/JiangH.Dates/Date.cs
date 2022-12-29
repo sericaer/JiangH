@@ -1,4 +1,5 @@
 ﻿using JiangH.Interfaces;
+using System;
 
 namespace JiangH.Dates
 {
@@ -41,14 +42,23 @@ namespace JiangH.Dates
             }
             set
             {
+                if(_day == value)
+                {
+                    return;
+                }
+
                 _day = value;
                 if (_day > 30)
                 {
                     month += 1;
                     _day = 1;
                 }
+
+                OnDaysInc?.Invoke(year, month, day);
             }
         }
+
+        public Action<int, int, int> OnDaysInc { get; set; }
 
         private int _year;
         private int _month;
