@@ -9,10 +9,13 @@ namespace JiangH.Sects
 {
     partial class Sect : ISect
     {
+        public static Random random = new Random();
+
         public static Func<ISect, IEnumerable<IRegion>> funcGetRegions { get; set; }
 
         public string name { get; set; }
         public IEnumerable<IRegion> regions => funcGetRegions(this);
+        public ITreasury treasury { get; }
 
         public IRegion location
         {
@@ -41,6 +44,34 @@ namespace JiangH.Sects
         public Sect(string name)
         {
             this.name = name;
+
+            var incomeValue = random.Next(0, 10);
+            var incomeItems = new List<Treasury.IncomeItem>()
+            {
+                new Treasury.IncomeItem(() =>
+                {
+                    return incomeValue;
+                },
+                ()=>
+                {
+                    return "DESC";
+                })
+            };
+
+            var spendValue = random.Next(0, 10);
+            var spendItems = new List<Treasury.SpendItem>()
+            {
+                new Treasury.SpendItem(() =>
+                {
+                    return spendValue;
+                },
+                ()=>
+                {
+                    return "DESC";
+                })
+            };
+
+            this.treasury = new Treasury(random.Next(30, 100), incomeItems, spendItems);
         }
     }
 }

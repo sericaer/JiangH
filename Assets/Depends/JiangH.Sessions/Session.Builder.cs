@@ -31,7 +31,7 @@ namespace JiangH.Sessions
 
             private static void BuildRelationSect2Reigions(IEnumerable<ISect> sects, IEnumerable<IRegion> regions)
             {
-                Sect.funcGetRegions = (sect) => regions.Where(x => x.sectInfo.sect == sect);
+                Sect.funcGetRegions = (sect) => regions.Where(x => x.sectInfo != null && x.sectInfo.sect == sect);
 
                 Random random = new Random();
                 var regionStack = new Queue<IRegion>(regions.OrderBy(_ => random.Next(0, int.MaxValue)));

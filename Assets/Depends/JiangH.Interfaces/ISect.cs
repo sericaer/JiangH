@@ -8,5 +8,7 @@ namespace JiangH.Interfaces
         IEnumerable<IRegion> regions { get; }
 
         IRegion location { get; set; }
+
+        ITreasury treasury { get; }
     }
 }
