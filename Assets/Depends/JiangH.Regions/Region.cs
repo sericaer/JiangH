@@ -10,18 +10,27 @@ namespace JiangH.Regions
 {
     partial class Region : Entity, IRegion
     {
+        public static Random random = new Random();
         public Coordinate coordinate { get; }
 
         public string name { get; }
 
         public string image { get; }
 
-        public ISect sect => relationsFrom.Where(x=>x.label == IRelation.Label.Owner).SingleOrDefault()?.getPeer(this) as ISect;
+        public ISect sect => relationsTo.Where(x=>x.label == IRelation.Label.Owner).SingleOrDefault()?.getPeer(this) as ISect;
+
+        public TreasuryProductor productor { get; }
 
         public Region(Coordinate coordinate, TerrainType value)
         {
             this.coordinate = coordinate;
             this.name = $"REGIN({coordinate.x}, {coordinate.y})";
+
+            this.productor = new TreasuryProductor()
+            {
+                desc = name,
+                value = random.Next(0, 10)
+            };
         }
     }
 }

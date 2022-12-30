@@ -10,6 +10,15 @@ namespace JiangH.Interfaces
         string image { get; }
 
         ISect sect { get; }
+
+        TreasuryProductor productor { get; }
+
+    }
+
+    public class TreasuryProductor : ITreasury.IIncomeItem
+    {
+        public string desc { get; set; }
+        public double value { get; set; }
     }
 
     public interface ITerrainMap : IEnumerable<KeyValuePair<Coordinate, TerrainType>>

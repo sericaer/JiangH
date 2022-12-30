@@ -28,19 +28,6 @@ namespace JiangH.Sects
         {
             this.name = name;
 
-            var incomeValue = random.Next(0, 10);
-            var incomeItems = new List<Treasury.IncomeItem>()
-            {
-                new Treasury.IncomeItem(() =>
-                {
-                    return incomeValue;
-                },
-                ()=>
-                {
-                    return "DESC";
-                })
-            };
-
             var spendValue = random.Next(0, 10);
             var spendItems = new List<Treasury.SpendItem>()
             {
@@ -54,7 +41,7 @@ namespace JiangH.Sects
                 })
             };
 
-            this.components.Add(new Treasury(random.Next(30, 100), incomeItems, spendItems));
+            this.components.Add(new Treasury(random.Next(30, 100), regions.Select(x=>x.productor), spendItems));
         }
     }
 }
