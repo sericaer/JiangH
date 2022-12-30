@@ -75,7 +75,7 @@ namespace JiangH.Sessions
                 {
                     var region = regionStack.Dequeue();
 
-                    session.relationDB.AddRelation(region as IEntity, sect as IEntity, IRelation.Label.Owner);
+                    session.relationDB.AddRelation(sect as IEntity, region as IEntity, IRelation.Label.Owner);
                     session.relationDB.AddRelation(region as IEntity, sect as IEntity, IRelation.Label.Location);
                 }
             }

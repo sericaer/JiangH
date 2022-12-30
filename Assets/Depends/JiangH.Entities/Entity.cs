@@ -11,6 +11,8 @@ namespace JiangH.Entities
     {
         public List<IComponent> components { get; } = new List<IComponent>();
 
-        public List<IRelation> relations { get; } = new List<IRelation>();
+        public List<IRelation> relationsFrom { get; } = new List<IRelation>();
+
+        public List<IRelation> relationsTo { get; } = new List<IRelation>();
     }
 }

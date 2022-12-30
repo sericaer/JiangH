@@ -16,7 +16,7 @@ namespace JiangH.Regions
 
         public string image { get; }
 
-        public ISect sect => relations.Where(x=>x.label == IRelation.Label.Owner).SingleOrDefault()?.getPeer(this) as ISect;
+        public ISect sect => relationsFrom.Where(x=>x.label == IRelation.Label.Owner).SingleOrDefault()?.getPeer(this) as ISect;
 
         public Region(Coordinate coordinate, TerrainType value)
         {

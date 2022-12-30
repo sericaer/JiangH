@@ -14,8 +14,8 @@ namespace JiangH.Relations
             var relation = new Relation(from, to, label);
             relationItems.Add(relation);
 
-            from.relations.Add(relation);
-            to.relations.Add(relation);
+            from.relationsFrom.Add(relation);
+            to.relationsTo.Add(relation);
         }
     }
 }

@@ -11,7 +11,9 @@ namespace JiangH.Interfaces
     {
         List<IComponent> components { get; }
 
-        List<IRelation> relations { get; }
+        List<IRelation> relationsFrom { get; }
+
+        List<IRelation> relationsTo { get; }
     }
 
     public interface IRelation
