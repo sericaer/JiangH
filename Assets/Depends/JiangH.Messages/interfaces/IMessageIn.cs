@@ -7,4 +7,11 @@ namespace JiangH.Messages.Interfaces
     {
         Dictionary<Type, MessageProceItem> dict { get; }
     }
+
+    public interface IMessageBus
+    {
+        void Register(IMessageIn messageIn);
+        void Register(IMessageOut messageIn);
+        void Register(IMessageInOut messageIn);
+    }
 }

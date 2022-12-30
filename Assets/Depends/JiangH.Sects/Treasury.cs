@@ -51,13 +51,5 @@ namespace JiangH.Sects
                 this.funcGetDesc = funcGetDesc;
             }
         }
-
-        public void OnDaysInc(int year, int month, int day)
-        {
-            if(day == 1)
-            {
-                current += surplus;
-            }
-        }
     }
 }

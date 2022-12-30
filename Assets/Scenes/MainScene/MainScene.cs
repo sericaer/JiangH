@@ -21,6 +21,8 @@ class MainScene : MonoBehaviour
         };
 
         session = Session.Builder.Build(gmInit);
+
+        TerminalCommand.session = session;
     }
 
     private void Start()
@@ -29,5 +31,10 @@ class MainScene : MonoBehaviour
 
         mapRender.SetSession(session);
         dateControl.SetSession(session);
+    }
+
+    private void Update()
+    {
+        
     }
 }

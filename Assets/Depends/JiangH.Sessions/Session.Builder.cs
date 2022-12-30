@@ -27,7 +27,7 @@ namespace JiangH.Sessions
 
                 BuildRelationSect2Reigions(session);
 
-                session.systems.AddRange(BuildSystems(session.entities));
+                session.systems.AddRange(BuildSystems(session.entities, session.relationDB));
 
                 RegisterMessages(session);
 
@@ -55,7 +55,7 @@ namespace JiangH.Sessions
                 }
             }
 
-            private static List<ISystem> BuildSystems(List<IEntity> entities)
+            private static List<ISystem> BuildSystems(List<IEntity> entities, Relations.RelationDataBase relationDB)
             {
                 var systems = new List<ISystem>();
 
@@ -63,6 +63,10 @@ namespace JiangH.Sessions
                 treasurySys.items = entities.SelectMany(x => x.components).OfType<ITreasury>();
 
                 systems.Add(treasurySys);
+
+                var relationDBOperationSystem = new RelationDBOperationSystem();
+                relationDBOperationSystem.relationDB = relationDB;
+                systems.Add(relationDBOperationSystem);
 
                 return systems;
             }

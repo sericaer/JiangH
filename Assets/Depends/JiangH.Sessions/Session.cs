@@ -1,6 +1,7 @@
 ﻿using JiangH.Dates;
 using JiangH.Interfaces;
 using JiangH.Messages;
+using JiangH.Messages.Interfaces;
 using JiangH.Relations;
 using JiangH.Sects;
 using System;
@@ -18,12 +19,12 @@ namespace JiangH.Sessions
         public IEnumerable<IRegion> regions => entities.OfType<IRegion>();
         public IEnumerable<ISect> sects => entities.OfType<ISect>();
 
+        public IMessageBus messageBus { get; } = new MessageBus();
+
         private List<IEntity> entities { get; } = new List<IEntity>();
         private List<ISystem> systems { get; } = new List<ISystem>();
 
         private RelationDataBase relationDB { get; } = new RelationDataBase();
-
-        private MessageBus messageBus { get; } = new MessageBus();
     }
 
 
@@ -45,6 +46,21 @@ namespace JiangH.Sessions
                     treasury.current += treasury.surplus;
                 }
             }
+        }
+    }
+
+    class RelationDBOperationSystem : MessageIn, ISystem
+    {
+        public RelationDataBase relationDB { get; set; }
+
+        public RelationDBOperationSystem()
+        {
+            RegisterMsg<MESSAGE_CHANGE_REGION_OWNER>(OnMessageChangeRegionOwner);
+        }
+
+        private void OnMessageChangeRegionOwner(MESSAGE_CHANGE_REGION_OWNER msg)
+        {
+            relationDB.AddRelation(msg.owner as IEntity, msg.region as IEntity, IRelation.Label.Owner);
         }
     }
 }

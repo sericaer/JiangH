@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JiangH.Messages.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,7 @@ namespace JiangH.Interfaces
         IEnumerable<IRegion> regions { get; }
         IEnumerable<ISect> sects { get; }
 
+        IMessageBus messageBus { get; }
     }
 
     public enum TerrainType

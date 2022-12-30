@@ -24,7 +24,7 @@ namespace JiangH.Regions
         public Region(Coordinate coordinate, TerrainType value)
         {
             this.coordinate = coordinate;
-            this.name = $"REGIN({coordinate.x}, {coordinate.y})";
+            this.name = $"REGIN({coordinate.x},{coordinate.y})";
 
             this.productor = new TreasuryProductor()
             {

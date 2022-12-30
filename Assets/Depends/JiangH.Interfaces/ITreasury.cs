@@ -21,7 +21,5 @@ namespace JiangH.Interfaces
             string desc { get; }
             double value { get; }
         }
-
-        void OnDaysInc(int year, int month, int day);
     }
 }

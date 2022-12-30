@@ -1,4 +1,5 @@
 ﻿using JiangH.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +17,16 @@ namespace JiangH.Relations
 
             from.relationsFrom.Add(relation);
             to.relationsTo.Add(relation);
+        }
+
+        internal IEnumerable<IRelation> GetRelationsFrom(IEntity from)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal IEnumerable<IRelation> GetRelationsTo(IEntity to)
+        {
+            throw new NotImplementedException();
         }
     }
 }
