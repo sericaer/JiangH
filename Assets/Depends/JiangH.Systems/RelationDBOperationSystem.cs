@@ -8,8 +8,10 @@ namespace JiangH.Systems
     {
         public IRelationDataBase relationDB { get; set; }
 
-        public RelationDBOperationSystem()
+        public RelationDBOperationSystem(Relations.RelationDataBase relationDB)
         {
+            this.relationDB = relationDB;
+
             RegisterMsg<MESSAGE_CHANGE_REGION_OWNER>(OnMessageChangeRegionOwner);
         }
 

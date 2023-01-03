@@ -11,8 +11,10 @@ namespace JiangH.Systems
     {
         public IEnumerable<ITreasury> items { get; set; }
 
-        public TreasurySystem()
+        public TreasurySystem(IEnumerable<ITreasury> items)
         {
+            this.items = items;
+
             RegisterMsg<MESSAGE_DATE_INC>(OnMessageDateInc);
         }
 
