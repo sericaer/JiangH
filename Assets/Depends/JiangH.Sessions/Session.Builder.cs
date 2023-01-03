@@ -21,16 +21,16 @@ namespace JiangH.Sessions
 
                 session.date = new Date();
 
-                session.terrainMap = JiangH.Maps.TerrainMap.Builder.Build(gmInit.mapHeight, gmInit.mapWidth);
+                session.terrainMap = Maps.TerrainMap.Builder.Build(gmInit.mapHeight, gmInit.mapWidth);
 
                 session.entities.AddRange(Region.Builder.BuildCollection(session.terrainMap, gmInit.regionCount));
                 session.entities.AddRange(Sect.Builder.BuildCollection(gmInit.sectCount));
                 session.entities.AddRange(Person.Builder.BuildCollection(gmInit.personCount));
 
-                BuildRelationSect2Reigions(session);
-
                 session.systems.Add(new TreasurySystem(session.entities.SelectMany(x => x.components).OfType<ITreasury>()));
                 session.systems.Add(new RelationDBOperationSystem(session.relationDB));
+
+                BuildRelation(session);
 
                 RegisterMessages(session);
 
@@ -58,7 +58,7 @@ namespace JiangH.Sessions
                 }
             }
 
-            private static void BuildRelationSect2Reigions(Session session)
+            private static void BuildRelation(Session session)
             {
                 Random random = new Random();
                 var regionStack = new Queue<IRegion>(session.regions.OrderBy(_ => random.Next(0, int.MaxValue)));
@@ -68,6 +68,19 @@ namespace JiangH.Sessions
 
                     session.relationDB.AddRelation(sect as IEntity, region as IEntity, IRelation.Label.Owner);
                     session.relationDB.AddRelation(region as IEntity, sect as IEntity, IRelation.Label.Location);
+                }
+
+                foreach(var person in session.persons)
+                {
+                    var index = random.Next(-1, session.sects.Count());
+                    if(index == -1)
+                    {
+                        continue;
+                    }
+
+                    var sect = session.sects.ElementAt(index);
+
+                    session.relationDB.AddRelation(sect as IEntity, person as IEntity, IRelation.Label.Owner);
                 }
             }
         }

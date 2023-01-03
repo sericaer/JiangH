@@ -11,7 +11,7 @@ namespace JiangH.Persons
     {
         public string name { get; set; }
 
-        public ISect sect => relationsTo.Where(x => x.label == IRelation.Label.Owner).SingleOrDefault()?.to as ISect;
+        public ISect sect => relationsTo.Where(x => x.label == IRelation.Label.Owner).SingleOrDefault()?.from as ISect;
 
         public IRegion patrolRegion => throw new NotImplementedException();
 

@@ -44,4 +44,5 @@ public class PersonData
     }
 
     public string name => person.name;
+    public string sect => person.sect != null ? person.sect.name : "--";
 }
