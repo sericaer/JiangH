@@ -60,6 +60,12 @@ namespace JiangH.Sessions
 
         private void OnMessageChangeRegionOwner(MESSAGE_CHANGE_REGION_OWNER msg)
         {
+            var oldRelation = relationDB.Where(x => x.label == IRelation.Label.Owner).SingleOrDefault(x => x.to == msg.region);
+            if (oldRelation != null)
+            {
+                relationDB.RemoveRelation(oldRelation);
+            }
+
             relationDB.AddRelation(msg.owner as IEntity, msg.region as IEntity, IRelation.Label.Owner);
         }
     }

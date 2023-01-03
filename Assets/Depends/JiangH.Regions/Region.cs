@@ -17,7 +17,7 @@ namespace JiangH.Regions
 
         public string image { get; }
 
-        public ISect sect => relationsTo.Where(x=>x.label == IRelation.Label.Owner).SingleOrDefault()?.getPeer(this) as ISect;
+        public ISect sect => relationsTo.Where(x=>x.label == IRelation.Label.Owner).SingleOrDefault(x=>x.to == this)?.from as ISect;
 
         public TreasuryProductor productor { get; }
 

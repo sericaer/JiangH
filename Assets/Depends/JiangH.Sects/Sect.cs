@@ -16,11 +16,11 @@ namespace JiangH.Sects
         public ITreasury treasury => components.OfType<ITreasury>().Single();
 
         public IEnumerable<IRegion> regions => relationsFrom.Where(x => x.label == IRelation.Label.Owner)
-            .Select(x => x.getPeer(this))
+            .Select(x => x.to)
             .OfType<IRegion>();
 
         public IRegion location => relationsTo.Where(x => x.label == IRelation.Label.Location)
-            .Select(x => x.getPeer(this))
+            .Select(x => x.from)
             .OfType<IRegion>()
             .Single();
 
