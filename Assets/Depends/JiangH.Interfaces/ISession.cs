@@ -13,7 +13,7 @@ namespace JiangH.Interfaces
         ITerrainMap terrainMap { get; }
         IEnumerable<IRegion> regions { get; }
         IEnumerable<ISect> sects { get; }
-
+        IEnumerable<IPerson> persons { get; }
         IMessageBus messageBus { get; }
     }
 
@@ -58,5 +58,6 @@ namespace JiangH.Interfaces
         public int mapHeight { get; internal set; }
         public int regionCount { get; internal set; }
         public int sectCount { get; internal set; }
+        public int personCount { get; internal set; }
     }
 }

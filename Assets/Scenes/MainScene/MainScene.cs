@@ -12,6 +12,7 @@ class MainScene : MonoBehaviour
     public Canvas uiCanvas;
     public SectTable prefabAllSects;
     public RegionTable prefabAllRegions;
+    public PersonTable pefabTablePerson;
 
     public void OnShowSects()
     {
@@ -25,6 +26,12 @@ class MainScene : MonoBehaviour
         regionTable.gmData = session.regions;
     }
 
+    public void OnShowAllPerson()
+    {
+        var table = Instantiate(pefabTablePerson, uiCanvas.transform);
+        table.gmData = session.persons;
+    }
+
     private void Awake()
     {
         var gmInit = new GMInit()
@@ -32,7 +39,8 @@ class MainScene : MonoBehaviour
             mapHeight = 21,
             mapWidth = 31,
             regionCount = 30,
-            sectCount = 10
+            sectCount = 10,
+            personCount = 200
         };
 
         session = Session.Builder.Build(gmInit);

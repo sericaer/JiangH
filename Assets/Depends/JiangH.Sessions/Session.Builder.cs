@@ -1,6 +1,7 @@
 ﻿using JiangH.Dates;
 using JiangH.Interfaces;
 using JiangH.Messages.Interfaces;
+using JiangH.Persons;
 using JiangH.Regions;
 using JiangH.Sects;
 using JiangH.Systems;
@@ -23,8 +24,8 @@ namespace JiangH.Sessions
                 session.terrainMap = JiangH.Maps.TerrainMap.Builder.Build(gmInit.mapHeight, gmInit.mapWidth);
 
                 session.entities.AddRange(Region.Builder.BuildCollection(session.terrainMap, gmInit.regionCount));
-
                 session.entities.AddRange(Sect.Builder.BuildCollection(gmInit.sectCount));
+                session.entities.AddRange(Person.Builder.BuildCollection(gmInit.personCount));
 
                 BuildRelationSect2Reigions(session);
 

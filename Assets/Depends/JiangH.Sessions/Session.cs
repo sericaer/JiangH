@@ -18,6 +18,7 @@ namespace JiangH.Sessions
         public ITerrainMap terrainMap { get; private set; }
         public IEnumerable<IRegion> regions => entities.OfType<IRegion>();
         public IEnumerable<ISect> sects => entities.OfType<ISect>();
+        public IEnumerable<IPerson> persons => entities.OfType<IPerson>();
 
         public IMessageBus messageBus { get; } = new MessageBus();
 
