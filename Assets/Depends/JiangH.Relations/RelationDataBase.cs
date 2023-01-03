@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace JiangH.Relations
 {
-    public class RelationDataBase : IEnumerable<IRelation>
+    public class RelationDataBase : IRelationDataBase
     {
         private List<IRelation> relationItems = new List<IRelation>();
 
-        internal void RemoveRelation(IRelation relation)
+        public void RemoveRelation(IRelation relation)
         {
             relationItems.Remove(relation);
 
@@ -20,23 +20,13 @@ namespace JiangH.Relations
             relation.to.relationsTo.Remove(relation);
         }
 
-        internal void AddRelation(IEntity from, IEntity to, IRelation.Label label)
+        public void AddRelation(IEntity from, IEntity to, IRelation.Label label)
         {
             var relation = new Relation(from, to, label);
             relationItems.Add(relation);
 
             from.relationsFrom.Add(relation);
             to.relationsTo.Add(relation);
-        }
-
-        internal IEnumerable<IRelation> GetRelationsFrom(IEntity from)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal IEnumerable<IRelation> GetRelationsTo(IEntity to)
-        {
-            throw new NotImplementedException();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
