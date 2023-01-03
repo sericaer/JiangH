@@ -6,9 +6,24 @@ class MainScene : MonoBehaviour
 {
     public MapRender mapRender;
     public DateControl dateControl;
-    public SectTable sectTable;
 
     private ISession session;
+
+    public Canvas uiCanvas;
+    public SectTable prefabAllSects;
+    public RegionTable prefabAllRegions;
+
+    public void OnShowSects()
+    {
+        var sectTable = Instantiate(prefabAllSects, uiCanvas.transform);
+        sectTable.gmData = session.sects;
+    }
+
+    public void OnShowRegions()
+    {
+        var regionTable = Instantiate(prefabAllRegions, uiCanvas.transform);
+        regionTable.gmData = session.regions;
+    }
 
     private void Awake()
     {
@@ -27,8 +42,6 @@ class MainScene : MonoBehaviour
 
     private void Start()
     {
-        sectTable.gmData = session.sects;
-
         mapRender.SetSession(session);
         dateControl.SetSession(session);
     }

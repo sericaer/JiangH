@@ -43,9 +43,9 @@ public class SectData
 
     public ISect sect { get; }
     public string name => sect.name;
+    public string location => sect.location.name;
+
     public int regionCount => sect.regions.Count();
-
     public int treasuryCurrent => sect.treasury.current;
-
     public int treasurySurplus => sect.treasury.surplus;
 }
