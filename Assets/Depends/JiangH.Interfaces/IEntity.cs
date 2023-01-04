@@ -29,6 +29,7 @@ namespace JiangH.Interfaces
         {
             Owner,
             Location,
+            Patrol,
         }
     }
 

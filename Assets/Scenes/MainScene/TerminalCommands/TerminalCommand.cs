@@ -27,22 +27,26 @@ public static class TerminalCommand
 
     private static ISession _session;
 
-    [RegisterCommand(Help = "Test", MaxArgCount = 0)]
-    public static void CommandTest(CommandArg[] args)
-    {
-        Terminal.Buffer.Clear();
-    }
 
     [RegisterCommand(Help = "", MaxArgCount = 2, MinArgCount = 2)]
     public static void CommandChangeRegionOwner(CommandArg[] args)
     {
-        var region = session.regions.Single(x => x.name == args[0].String);
-        var sect = session.sects.Single(x => x.name == args[1].String);
-
         var msg = new MESSAGE_CHANGE_REGION_OWNER()
         {
             region = session.regions.Single(x => x.name == args[0].String),
             owner = session.sects.Single(x => x.name == args[1].String)
+        };
+
+        comm.SendMessage(msg);
+    }
+
+    [RegisterCommand(Help = "", MaxArgCount = 2, MinArgCount = 2)]
+    public static void CommandAddPatrolerToRegion(CommandArg[] args)
+    {
+        var msg = new MESSAGE_ADD_PATROLER_TO_REGION()
+        {
+            patroler = session.persons.Single(x => x.name == args[0].String),
+            region = session.regions.Single(x => x.name == args[1].String)
         };
 
         comm.SendMessage(msg);

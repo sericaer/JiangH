@@ -14,4 +14,10 @@ namespace JiangH.Messages
         public IRegion region;
         public ISect owner;
     }
+
+    public class MESSAGE_ADD_PATROLER_TO_REGION : MESSAGE
+    {
+        public IPerson patroler;
+        public IRegion region;
+    }
 }

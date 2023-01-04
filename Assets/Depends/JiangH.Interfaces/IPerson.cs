@@ -7,5 +7,7 @@
         ISect sect { get; }
 
         IRegion patrolRegion { get; }
+
+        ITreasury.ChangeSet salary { get; }
     }
 }

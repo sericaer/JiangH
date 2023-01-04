@@ -45,4 +45,6 @@ public class PersonData
 
     public string name => person.name;
     public string sect => person.sect != null ? person.sect.name : "--";
+    public string salary => person.sect != null ? person.salary.value.ToString() : "--";
+    public string patrolRegion => person.patrolRegion != null ? person.patrolRegion.name : "--";
 }

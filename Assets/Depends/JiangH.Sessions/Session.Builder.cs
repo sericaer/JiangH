@@ -82,6 +82,21 @@ namespace JiangH.Sessions
 
                     session.relationDB.AddRelation(sect as IEntity, person as IEntity, IRelation.Label.Owner);
                 }
+
+                foreach (var region in session.regions.Where(x=>x.sect != null))
+                {
+                    var validPerson = region.sect.persons.Where(x => x.patrolRegion == null);
+
+                    var index = random.Next(-1, validPerson.Count());
+                    if (index == -1)
+                    {
+                        continue;
+                    }
+
+                    var person = validPerson.ElementAt(index);
+
+                    session.relationDB.AddRelation(person as IEntity, region as IEntity, IRelation.Label.Patrol);
+                }
             }
         }
     }

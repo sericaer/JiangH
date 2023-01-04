@@ -18,19 +18,33 @@ namespace JiangH.Regions
         public string image { get; }
 
         public ISect sect => relationsTo.Where(x=>x.label == IRelation.Label.Owner).SingleOrDefault(x=>x.to == this)?.from as ISect;
+        public IEnumerable<IPerson> patrolers => relationsTo.Where(x => x.label == IRelation.Label.Patrol).Select(x => x.from).OfType<IPerson>();
+        public double collectRatio => patrolers.Count() / 5.0;
 
-        public TreasuryProductor productor { get; }
+        public ITreasury.ChangeSet productor { get; }
 
         public Region(Coordinate coordinate, TerrainType value)
         {
             this.coordinate = coordinate;
             this.name = $"REGIN({coordinate.x},{coordinate.y})";
 
-            this.productor = new TreasuryProductor()
-            {
-                desc = name,
-                value = random.Next(0, 10)
-            };
+            var productorValue = random.Next(0, 10);
+            this.productor = new ITreasury.ChangeSet(()=> productorValue * collectRatio, () => name);
         }
     }
+
+    //public class EffectDynamic : IEffect
+    //{
+    //    public string desc { get; }
+
+    //    public double value => funcCalcValue();
+
+    //    private Func<double> funcCalcValue;
+
+    //    public EffectDynamic(string desc, Func<double> funcCalcValue)
+    //    {
+    //        this.desc = desc;
+    //        this.funcCalcValue = funcCalcValue;
+    //    }
+    //}
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace JiangH.Interfaces
 {
@@ -7,19 +8,22 @@ namespace JiangH.Interfaces
         int current { get; set; }
         int surplus { get; }
 
-        IEnumerable<IIncomeItem> incomeItems { get; }
-        IEnumerable<ISpendItem> spendItems { get; }
+        IEnumerable<ChangeSet> incomeItems { get; }
+        IEnumerable<ChangeSet> spendItems { get; }
 
-        interface IIncomeItem
+        class ChangeSet
         {
-            string desc { get; }
-            double value { get; }
-        }
+            public string desc => funcGetDesc();
+            public double value => funcCalcValue();
 
-        interface ISpendItem
-        {
-            string desc { get; }
-            double value { get; }
+            private Func<double> funcCalcValue;
+            private Func<string> funcGetDesc;
+
+            public ChangeSet(Func<double> funcCalcValue, Func<string> funcGetDesc)
+            {
+                this.funcCalcValue = funcCalcValue;
+                this.funcGetDesc = funcGetDesc;
+            }
         }
     }
 }

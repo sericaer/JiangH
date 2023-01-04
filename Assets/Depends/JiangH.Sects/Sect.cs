@@ -24,24 +24,15 @@ namespace JiangH.Sects
             .OfType<IRegion>()
             .Single();
 
+        public IEnumerable<IPerson> persons => relationsFrom.Where(x => x.label == IRelation.Label.Owner)
+            .Select(x => x.to)
+            .OfType<IPerson>();
+
         public Sect(string name)
         {
             this.name = name;
 
-            var spendValue = random.Next(0, 10);
-            var spendItems = new List<Treasury.SpendItem>()
-            {
-                new Treasury.SpendItem(() =>
-                {
-                    return spendValue;
-                },
-                ()=>
-                {
-                    return "DESC";
-                })
-            };
-
-            this.components.Add(new Treasury(random.Next(30, 100), regions.Select(x=>x.productor), spendItems));
+            this.components.Add(new Treasury(random.Next(30, 100), regions.Select(x=>x.productor), persons.Select(x=>x.salary)));
         }
     }
 }
