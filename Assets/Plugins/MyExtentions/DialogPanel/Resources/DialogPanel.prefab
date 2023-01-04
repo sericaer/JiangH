@@ -370,4 +370,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   closeButton: {fileID: 2821853691059114846}
-  _isMode: 0
+  _isMode: 1

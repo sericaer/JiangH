@@ -29,19 +29,21 @@ namespace JiangH.Messages
 
         public void Register(IMessageOut messageOut)
         {
-            messageOut.SendMessage = (msg) =>
-            {
-                foreach(var item in dict[msg.GetType()])
-                {
-                    item.Process(msg);
-                }
-            };
+            messageOut.SendMessage = SendMessage;
         }
 
         public void Register(IMessageInOut messageInOut)
         {
             Register((IMessageIn)messageInOut);
             Register((IMessageOut)messageInOut);
+        }
+
+        public void SendMessage(MESSAGE msg)
+        {
+            foreach (var item in dict[msg.GetType()])
+            {
+                item.Process(msg);
+            }
         }
     }
 

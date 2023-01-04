@@ -1,4 +1,5 @@
 ﻿using JiangH.Interfaces;
+using JiangH.Messages;
 using JiangH.Sessions;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ class MainScene : MonoBehaviour
     public SectTable prefabAllSects;
     public RegionTable prefabAllRegions;
     public PersonTable pefabTablePerson;
+    public RegionDetail pefabRegionDetail;
 
     public void OnShowSects()
     {
@@ -22,8 +24,29 @@ class MainScene : MonoBehaviour
 
     public void OnShowRegions()
     {
-        var regionTable = Instantiate(prefabAllRegions, uiCanvas.transform);
-        regionTable.gmData = session.regions;
+        var table = Instantiate(prefabAllRegions, uiCanvas.transform);
+        table.gmData = session.regions;
+        table.showRegionDetail.AddListener((region) => 
+        {
+            var detail = Instantiate(pefabRegionDetail, uiCanvas.transform);
+            detail.gmData = region;
+
+            detail.addPatroler.AddListener((person) =>
+            {
+                var msg = new MESSAGE_ADD_PATROLER_TO_REGION()
+                {
+                    patroler = person,
+                    region = region
+                };
+
+                session.messageBus.SendMessage(msg);
+            });
+
+            detail.addPatroler.RemoveListener((person) =>
+            {
+
+            });
+        });
     }
 
     public void OnShowAllPerson()

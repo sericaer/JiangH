@@ -1,7 +1,9 @@
 ﻿using JiangH.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 class RegionTable : MonoBehaviour
 {
@@ -9,8 +11,12 @@ class RegionTable : MonoBehaviour
 
     public IEnumerable<IRegion> gmData { get; set; }
 
+    public UnityEvent<IRegion> showRegionDetail;
+
     public void Start()
     {
+        RegionData.actionDetail = (region) => showRegionDetail.Invoke(region);
+
         regionDatas.Clear();
     }
 
@@ -37,6 +43,8 @@ class RegionTable : MonoBehaviour
 
 public class RegionData
 {
+    public static Action<IRegion> actionDetail;
+
     public readonly IRegion region;
 
     public RegionData(IRegion region)
@@ -49,4 +57,9 @@ public class RegionData
     public string collectRatio => region.sect != null ? $"{region.collectRatio * 100}%" : "--";
     public int patrolerCount => region.patrolers.Count();
     public double treasuryProduct => region.productor.value;
+
+    public void OnDetail()
+    {
+        actionDetail(region);
+    }
 }

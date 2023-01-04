@@ -13,5 +13,7 @@ namespace JiangH.Messages.Interfaces
         void Register(IMessageIn messageIn);
         void Register(IMessageOut messageIn);
         void Register(IMessageInOut messageIn);
+
+        void SendMessage(MESSAGE msg);
     }
 }
