@@ -34,6 +34,8 @@ namespace JiangH.Sessions
 
                 RegisterMessages(session);
 
+                session.player = session.sects.First().persons.First();
+
                 return session;
             }
 

@@ -9,6 +9,7 @@ namespace JiangH.Interfaces
 {
     public interface ISession
     {
+        IPerson player { get; }
         IDate date { get; }
         ITerrainMap terrainMap { get; }
         IEnumerable<IRegion> regions { get; }
