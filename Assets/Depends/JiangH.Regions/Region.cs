@@ -19,7 +19,7 @@ namespace JiangH.Regions
 
         public ISect sect => relationsTo.Where(x=>x.label == IRelation.Label.Owner).SingleOrDefault(x=>x.to == this)?.from as ISect;
         public IEnumerable<IPerson> patrolers => relationsTo.Where(x => x.label == IRelation.Label.Patrol).Select(x => x.from).OfType<IPerson>();
-        public double collectRatio => patrolers.Count() / 5.0;
+        public int collectRatio => patrolers.Sum(x => x.collectAblity);
 
         public ITreasury.ChangeSet productor { get; }
 
@@ -29,7 +29,7 @@ namespace JiangH.Regions
             this.name = $"REGIN({coordinate.x},{coordinate.y})";
 
             var productorValue = random.Next(0, 10);
-            this.productor = new ITreasury.ChangeSet(()=> productorValue * collectRatio, () => name);
+            this.productor = new ITreasury.ChangeSet(()=> productorValue * collectRatio / 100, () => name);
         }
     }
 

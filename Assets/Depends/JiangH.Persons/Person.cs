@@ -11,6 +11,8 @@ namespace JiangH.Persons
         public ISect sect => relationsTo.Where(x => x.label == IRelation.Label.Owner).SingleOrDefault()?.from as ISect;
         public IRegion patrolRegion => relationsFrom.Where(x => x.label == IRelation.Label.Patrol).SingleOrDefault()?.to as IRegion;
 
+        public int collectAblity => 20;
+
         public ITreasury.ChangeSet salary { get; }
 
         public Person(string name)

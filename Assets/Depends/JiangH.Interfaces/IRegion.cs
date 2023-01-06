@@ -15,7 +15,7 @@ namespace JiangH.Interfaces
         IEnumerable<IPerson> patrolers { get; }
         ITreasury.ChangeSet productor { get; }
 
-        double collectRatio { get; }
+        int collectRatio { get; }
 
     }
 

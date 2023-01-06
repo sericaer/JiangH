@@ -9,5 +9,7 @@
         IRegion patrolRegion { get; }
 
         ITreasury.ChangeSet salary { get; }
+
+        int collectAblity { get; }
     }
 }

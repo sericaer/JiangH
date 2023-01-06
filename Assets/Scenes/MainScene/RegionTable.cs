@@ -54,7 +54,7 @@ public class RegionData
 
     public string name => region.name;
     public string sect => region.sect != null ? region.sect.name : "--";
-    public string collectRatio => region.sect != null ? $"{region.collectRatio * 100}%" : "--";
+    public string collectRatio => region.sect != null ? $"{region.collectRatio}%" : "--";
     public int patrolerCount => region.patrolers.Count();
     public double treasuryProduct => region.productor.value;
 
