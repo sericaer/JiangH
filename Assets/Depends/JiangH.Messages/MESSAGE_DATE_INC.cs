@@ -20,4 +20,9 @@ namespace JiangH.Messages
         public IPerson patroler;
         public IRegion region;
     }
+
+    public class MESSAGE_REMOVE_PATROLER_FROM_REGION : MESSAGE
+    {
+        public IPerson patroler;
+    }
 }

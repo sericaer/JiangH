@@ -2,10 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityUITable;
+using MyExtentions;
+using System;
 
 class PersonTable : MonoBehaviour
 {
     public List<PersonData> items = new List<PersonData>();
+
+    public Table table;
+
 
     public IEnumerable<IPerson> gmData { get; set; }
 
@@ -20,7 +26,8 @@ class PersonTable : MonoBehaviour
         {
             if (items.All(x => x.person != person))
             {
-                items.Add(new PersonData(person));
+                var personData = new PersonData(person);
+                items.Add(personData);
             }
         }
 
@@ -31,6 +38,11 @@ class PersonTable : MonoBehaviour
                 items.Remove(item);
             }
         }
+    }
+
+    public void SetVaildColums(params string[] columnNames)
+    {
+        table.SetVaildColumn(columnNames);
     }
 }
 
@@ -47,4 +59,6 @@ public class PersonData
     public string sect => person.sect != null ? person.sect.name : "--";
     public string salary => person.sect != null ? person.salary.value.ToString() : "--";
     public string patrolRegion => person.patrolRegion != null ? person.patrolRegion.name : "--";
+
+    private bool _isSelect;
 }

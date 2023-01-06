@@ -146,7 +146,7 @@ namespace UnityUITable
             return validColumns.Count != oldCount;
         }
 
-        [SerializeField] [HideInInspector] HeaderRow headerRow;
+        [SerializeField] [HideInInspector] public HeaderRow headerRow;
 
         [SerializeField] [HideInInspector] List<TableRow> tableRows = new List<TableRow>();
 

@@ -19,9 +19,41 @@ class RegionDetail : MonoBehaviour
     public Button addPatrolerButton;
     public Button removePatrolerButton;
 
+    public SelectPersonPanel pefabSelectPersonPanel;
+
     void Start()
     {
         defaultPatroler.gameObject.SetActive(false);
+
+        addPatrolerButton.onClick.AddListener(() =>
+        {
+            var table = Instantiate(pefabSelectPersonPanel, MainScene.UIRoot);
+            table.SetVaildColums("name");
+            table.gmData = gmData.sect.persons.Where(x => x.patrolRegion == null);
+
+            table.selectPersonsEvent.AddListener((persons) =>
+            {
+                foreach(var person in persons)
+                {
+                    addPatroler.Invoke(person);
+                }
+            });
+        });
+
+        removePatrolerButton.onClick.AddListener(() =>
+        {
+            var table = Instantiate(pefabSelectPersonPanel, MainScene.UIRoot);
+            table.SetVaildColums("name");
+            table.gmData = gmData.patrolers;
+
+            table.selectPersonsEvent.AddListener((persons) =>
+            {
+                foreach (var person in persons)
+                {
+                    removePatroler.Invoke(person);
+                }
+            });
+        });
     }
 
     void FixedUpdate()
@@ -29,7 +61,9 @@ class RegionDetail : MonoBehaviour
         regionName.text = gmData.name;
         treausryPdt.text = gmData.productor.value.ToString();
 
-        foreach (var patrolerPanel in defaultPatroler.GetComponentsInParent<PatrolerPanel>())
+        var container = defaultPatroler.transform.parent;
+
+        foreach (var patrolerPanel in container.GetComponentsInChildren<PatrolerPanel>())
         {
             if(gmData.patrolers.All(x=> x != patrolerPanel.gmData))
             {
@@ -37,7 +71,6 @@ class RegionDetail : MonoBehaviour
             }
         }
 
-        var container = defaultPatroler.transform.parent;
         foreach (var patroler in gmData.patrolers)
         {
             if(container.GetComponentsInChildren<PatrolerPanel>().All(x=>x.gmData != patroler))

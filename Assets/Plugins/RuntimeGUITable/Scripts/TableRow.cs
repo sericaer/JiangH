@@ -60,7 +60,7 @@ namespace UnityUITable
 		protected virtual void CreateCells()
 		{
 			int columnIndex = 0;
-			foreach(TableColumnInfo column in table.columns)
+			foreach(TableColumnInfo column in table.columns.Where(x=>x.isShow))
 			{
 				CreateCell(column, columnIndex);
 				columnIndex++;

@@ -42,6 +42,9 @@ namespace UnityUITable
 
 			} 
 		}
+
+		public bool isShow { get; set; } = true;
+
 		public bool isSortable;
 		public bool expandableHeight;
 		public bool autoColumnTitle = true;

@@ -246,7 +246,7 @@ GameObject:
   - component: {fileID: 5184227744859988456}
   - component: {fileID: 5184227744859988459}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -313,7 +313,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: AddPatroler
 --- !u!1 &5184227744898130838
 GameObject:
   m_ObjectHideFlags: 0
@@ -326,7 +326,7 @@ GameObject:
   - component: {fileID: 5184227744898130837}
   - component: {fileID: 5184227744898130836}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -393,7 +393,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: RemovePatroler
 --- !u!1 &5184227744915478439
 GameObject:
   m_ObjectHideFlags: 0
@@ -1027,6 +1027,15 @@ MonoBehaviour:
   regionName: {fileID: 5184227745440522858}
   treausryPdt: {fileID: 5184227745005507627}
   defaultPatroler: {fileID: 5184227745122550875}
+  addPatroler:
+    m_PersistentCalls:
+      m_Calls: []
+  removePatroler:
+    m_PersistentCalls:
+      m_Calls: []
+  addPatrolerButton: {fileID: 5184227745917355216}
+  removePatrolerButton: {fileID: 5184227746045621887}
+  pefabSelectPersonPanel: {fileID: 1082765517952248988, guid: dae8f00268627304faf8eadf2c5ad65e, type: 3}
 --- !u!1 &5184227745401013343
 GameObject:
   m_ObjectHideFlags: 0
@@ -1564,7 +1573,7 @@ GameObject:
   - component: {fileID: 5184227745917355217}
   - component: {fileID: 5184227745917355216}
   m_Layer: 5
-  m_Name: Button
+  m_Name: ButtonAddPatroler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1792,7 +1801,7 @@ GameObject:
   - component: {fileID: 5184227746045621884}
   - component: {fileID: 5184227746045621887}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: ButtonRemovePatroler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

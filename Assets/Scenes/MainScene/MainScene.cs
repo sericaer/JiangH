@@ -5,6 +5,8 @@ using UnityEngine;
 
 class MainScene : MonoBehaviour
 {
+    public static Transform UIRoot;
+
     public MapRender mapRender;
     public DateControl dateControl;
 
@@ -18,17 +20,17 @@ class MainScene : MonoBehaviour
 
     public void OnShowSects()
     {
-        var sectTable = Instantiate(prefabAllSects, uiCanvas.transform);
+        var sectTable = Instantiate(prefabAllSects, UIRoot);
         sectTable.gmData = session.sects;
     }
 
     public void OnShowRegions()
     {
-        var table = Instantiate(prefabAllRegions, uiCanvas.transform);
+        var table = Instantiate(prefabAllRegions, UIRoot);
         table.gmData = session.regions;
         table.showRegionDetail.AddListener((region) => 
         {
-            var detail = Instantiate(pefabRegionDetail, uiCanvas.transform);
+            var detail = Instantiate(pefabRegionDetail, UIRoot);
             detail.gmData = region;
 
             detail.addPatroler.AddListener((person) =>
@@ -42,21 +44,28 @@ class MainScene : MonoBehaviour
                 session.messageBus.SendMessage(msg);
             });
 
-            detail.addPatroler.RemoveListener((person) =>
+            detail.removePatroler.AddListener((person) =>
             {
+                var msg = new MESSAGE_REMOVE_PATROLER_FROM_REGION()
+                {
+                    patroler = person
+                };
 
+                session.messageBus.SendMessage(msg);
             });
         });
     }
 
     public void OnShowAllPerson()
     {
-        var table = Instantiate(pefabTablePerson, uiCanvas.transform);
+        var table = Instantiate(pefabTablePerson, UIRoot);
         table.gmData = session.persons;
     }
 
     private void Awake()
     {
+        UIRoot = uiCanvas.transform;
+
         var gmInit = new GMInit()
         {
             mapHeight = 21,

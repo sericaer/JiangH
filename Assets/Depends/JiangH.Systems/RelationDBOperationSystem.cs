@@ -14,6 +14,7 @@ namespace JiangH.Systems
 
             RegisterMsg<MESSAGE_CHANGE_REGION_OWNER>(OnMessageChangeRegionOwner);
             RegisterMsg<MESSAGE_ADD_PATROLER_TO_REGION>(OnMessageAddPatrolerToRegion);
+            RegisterMsg<MESSAGE_REMOVE_PATROLER_FROM_REGION>(OnMessageRemovePatrolerFromRegion);
         }
 
         private void OnMessageChangeRegionOwner(MESSAGE_CHANGE_REGION_OWNER msg)
@@ -36,6 +37,15 @@ namespace JiangH.Systems
             //}
 
             relationDB.AddRelation(msg.patroler as IEntity, msg.region as IEntity, IRelation.Label.Patrol);
+        }
+
+        private void OnMessageRemovePatrolerFromRegion(MESSAGE_REMOVE_PATROLER_FROM_REGION msg)
+        {
+            var oldRelation = relationDB.Where(x => x.label == IRelation.Label.Patrol).SingleOrDefault(x => x.from == msg.patroler);
+            if (oldRelation != null)
+            {
+                relationDB.RemoveRelation(oldRelation);
+            }
         }
     }
 }
