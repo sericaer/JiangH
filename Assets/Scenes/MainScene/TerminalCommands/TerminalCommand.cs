@@ -52,6 +52,17 @@ public static class TerminalCommand
         comm.SendMessage(msg);
     }
 
+    [RegisterCommand(Help = "", MaxArgCount = 1, MinArgCount = 1)]
+    public static void CommandChangePlayer(CommandArg[] args)
+    {
+        var msg = new MESSAGE_CHANGE_PLAYER()
+        {
+            newPlayer = session.persons.Single(x => x.name == args[0].String),
+        };
+
+        comm.SendMessage(msg);
+    }
+
     private class Communication : MessageOut
     {
     }

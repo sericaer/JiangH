@@ -25,4 +25,9 @@ namespace JiangH.Messages
     {
         public IPerson patroler;
     }
+
+    public class MESSAGE_CHANGE_PLAYER : MESSAGE
+    {
+        public IPerson newPlayer;
+    }
 }
