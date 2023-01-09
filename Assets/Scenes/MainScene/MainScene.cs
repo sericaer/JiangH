@@ -9,6 +9,7 @@ class MainScene : MonoBehaviour
 
     public MapRender mapRender;
     public DateControl dateControl;
+    public PlayerTopInfo playerTopInfo;
 
     private ISession session;
 
@@ -84,6 +85,7 @@ class MainScene : MonoBehaviour
     {
         mapRender.SetSession(session);
         dateControl.SetSession(session);
+        playerTopInfo.SetSession(session);
     }
 
     private void Update()

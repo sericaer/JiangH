@@ -10,6 +10,6 @@ public class PlayerSectOfficePanel : MonoBehaviour
 
     private void FixedUpdate()
     {
-        sectName.text = sect.name;
+        sectName.text = sect != null ? sect.name : "--";
     }
 }
