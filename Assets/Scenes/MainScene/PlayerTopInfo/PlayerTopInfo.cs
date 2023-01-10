@@ -5,7 +5,7 @@ using UnityEngine;
 class PlayerTopInfo : MonoBehaviour
 {
     public PlayerPanel playerPanel;
-    public PlayerSectOfficePanel PlayerSectOfficePanel;
+    public PlayerSectData playerSectData;
 
     private ISession session;
 
@@ -13,7 +13,8 @@ class PlayerTopInfo : MonoBehaviour
     public void FixedUpdate()
     {
         playerPanel.player = session.player;
-        PlayerSectOfficePanel.sect = session.player.sect;
+        playerSectData.sect = session.player.sect;
+        playerSectData.office = session.player.office;
     }
 
     internal void SetSession(ISession session)

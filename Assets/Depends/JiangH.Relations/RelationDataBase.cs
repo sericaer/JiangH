@@ -20,9 +20,9 @@ namespace JiangH.Relations
             relation.to.relationsTo.Remove(relation);
         }
 
-        public void AddRelation(IEntity from, IEntity to, IRelation.Label label)
+        public void AddRelation(IEntity from, IEntity to, IRelation.Label label, params object[] attributes)
         {
-            var relation = new Relation(from, to, label);
+            var relation = new Relation(from, to, label, attributes);
             relationItems.Add(relation);
 
             from.relationsFrom.Add(relation);

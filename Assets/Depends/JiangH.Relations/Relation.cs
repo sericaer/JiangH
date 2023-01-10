@@ -1,37 +1,27 @@
 ﻿using JiangH.Interfaces;
 using System;
+using System.Collections.Generic;
 
 namespace JiangH.Relations
 {
     class Relation : IRelation
     {
-        public Relation(IEntity from, IEntity to, IRelation.Label label)
-        {
-            this.from = from;
-            this.to = to;
-            this.label = label;
-        }
-
         public IEntity from { get; }
 
         public IEntity to { get; }
 
         public IRelation.Label label { get; }
 
-        public IEntity getPeer(IEntity p1)
+        public IEnumerable<object> attributes => _attributes;
+
+        private List<object> _attributes = new List<object>();
+        public Relation(IEntity from, IEntity to, IRelation.Label label, params object[] attributes)
         {
-            if (from == p1)
-            {
-                return to;
-            }
-            else if (to == p1)
-            {
-                return from;
-            }
-            else
-            {
-                throw new Exception();
-            }
+            this.from = from;
+            this.to = to;
+            this.label = label;
+
+            _attributes.AddRange(attributes);
         }
     }
 }

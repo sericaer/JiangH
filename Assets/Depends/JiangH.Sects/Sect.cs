@@ -24,8 +24,8 @@ namespace JiangH.Sects
             .OfType<IRegion>()
             .Single();
 
-        public IEnumerable<IPerson> persons => relationsFrom.Where(x => x.label == IRelation.Label.Owner)
-            .Select(x => x.to)
+        public IEnumerable<IPerson> persons => relationsTo.Where(x => x.label == IRelation.Label.Member)
+            .Select(x => x.from)
             .OfType<IPerson>();
 
         public Sect(string name)

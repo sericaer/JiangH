@@ -21,15 +21,19 @@ namespace JiangH.Interfaces
         IEntity from { get; }
         IEntity to { get; }
 
-        IEntity getPeer(IEntity from);
-
         Label label { get; }
+
+        IEnumerable<object> attributes { get; }
 
         enum Label
         {
             Owner,
             Location,
             Patrol,
+            Constitute,
+            TakeOffice,
+            Master,
+            Member,
         }
     }
 

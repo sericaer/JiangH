@@ -1,6 +1,7 @@
 ﻿using JiangH.Dates;
 using JiangH.Interfaces;
 using JiangH.Messages.Interfaces;
+using JiangH.Offices;
 using JiangH.Persons;
 using JiangH.Regions;
 using JiangH.Sects;
@@ -73,17 +74,22 @@ namespace JiangH.Sessions
                     session.relationDB.AddRelation(region as IEntity, sect as IEntity, IRelation.Label.Location);
                 }
 
-                foreach(var person in session.persons)
+                var queuePersons = new Queue<IPerson>(session.persons);
+                foreach (var sect in session.sects)
                 {
-                    var index = random.Next(-1, session.sects.Count());
-                    if(index == -1)
+                    var memberCount = random.Next(1, Math.Min(queuePersons.Count, 5));
+                    for(int i=0; i< memberCount; i++)
                     {
-                        continue;
+                        var person = queuePersons.Dequeue();
+
+                        var office = new Office();
+                        if(i==0)
+                        {
+                            office.AddAuthority(IOffice.Authority.Possessor);
+                        }
+
+                        session.relationDB.AddRelation(person as IEntity, sect as IEntity, IRelation.Label.Member, office);
                     }
-
-                    var sect = session.sects.ElementAt(index);
-
-                    session.relationDB.AddRelation(sect as IEntity, person as IEntity, IRelation.Label.Owner);
                 }
 
                 foreach (var region in session.regions.Where(x=>x.sect != null))

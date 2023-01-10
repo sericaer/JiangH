@@ -8,12 +8,14 @@ namespace JiangH.Persons
     public partial class Person : Entity, IPerson
     {
         public string name { get; set; }
-        public ISect sect => relationsTo.Where(x => x.label == IRelation.Label.Owner).SingleOrDefault()?.from as ISect;
-        public IRegion patrolRegion => relationsFrom.Where(x => x.label == IRelation.Label.Patrol).SingleOrDefault()?.to as IRegion;
+        public ISect sect => relationsFrom.SingleOrDefault(x => x.label == IRelation.Label.Member)?.to as ISect;
+        public IRegion patrolRegion => relationsFrom.SingleOrDefault(x => x.label == IRelation.Label.Patrol)?.to as IRegion;
 
         public int collectAblity => 20;
 
         public ITreasury.ChangeSet salary { get; }
+
+        public IOffice office => relationsFrom.SingleOrDefault(x => x.label == IRelation.Label.Member)?.attributes.OfType<IOffice>().SingleOrDefault();
 
         public Person(string name)
         {
