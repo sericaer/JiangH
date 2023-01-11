@@ -73,6 +73,11 @@ namespace JiangH.Systems
                     msgPersonWillJoininSect.sect = sect;
 
                     SendMessage(msgPersonWillJoininSect);
+
+                    if (sect.willJoininPersons.Count() >= MAX_JOB_SEEKER_COUNT)
+                    {
+                        break;
+                    }
                 }
             }
         }
