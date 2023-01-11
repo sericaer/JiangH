@@ -12,5 +12,13 @@ namespace JiangH.Interfaces
         IRegion location { get; }
 
         ITreasury treasury { get; }
+
+        IRecruitRequest recruitRequest { get; }
+
+        IEnumerable<IPerson> willJoininPersons { get; }
+        interface IRecruitRequest
+        {
+
+        }
     }
 }

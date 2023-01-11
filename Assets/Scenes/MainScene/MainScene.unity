@@ -2533,6 +2533,7 @@ MonoBehaviour:
   prefabAllRegions: {fileID: 8028109885930942982, guid: 0bf9242b839da9e44987e58b8fb90355, type: 3}
   pefabTablePerson: {fileID: 5074293445749342634, guid: 3be388ebc06104d4fb59abc90cf048f7, type: 3}
   pefabRegionDetail: {fileID: 7095760362857575004, guid: 0c298456c2270964b8e39b236b382a81, type: 3}
+  pefabSectDetail: {fileID: 1199200478019683266, guid: 5d612eb0143f3f148936e619710c6aa4, type: 3}
 --- !u!4 &996743815
 Transform:
   m_ObjectHideFlags: 0

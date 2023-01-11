@@ -1035,7 +1035,7 @@ MonoBehaviour:
       m_Calls: []
   addPatrolerButton: {fileID: 5184227745917355216}
   removePatrolerButton: {fileID: 5184227746045621887}
-  pefabSelectPersonPanel: {fileID: 1082765517952248988, guid: dae8f00268627304faf8eadf2c5ad65e, type: 3}
+  pefabSelectPersonPanel: {fileID: 100176108636517470, guid: dae8f00268627304faf8eadf2c5ad65e, type: 3}
 --- !u!1 &5184227745401013343
 GameObject:
   m_ObjectHideFlags: 0

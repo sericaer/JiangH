@@ -15,6 +15,8 @@ namespace JiangH.Interfaces
         ITreasury.ChangeSet salary { get; }
 
         int collectAblity { get; }
+
+        ISect willJoinInSect { get; }
     }
 
     public interface IOffice

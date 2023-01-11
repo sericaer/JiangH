@@ -15,6 +15,8 @@ namespace JiangH.Systems
             RegisterMsg<MESSAGE_CHANGE_REGION_OWNER>(OnMessageChangeRegionOwner);
             RegisterMsg<MESSAGE_ADD_PATROLER_TO_REGION>(OnMessageAddPatrolerToRegion);
             RegisterMsg<MESSAGE_REMOVE_PATROLER_FROM_REGION>(OnMessageRemovePatrolerFromRegion);
+            RegisterMsg<MESSAGE_PERSON_WILL_JOININ_SECT>(OnMessagePersonWillJoinInSect);
+            RegisterMsg<MESSAGE_PERSON_JOININ_SECT>(OnMessagePersonJoininSect);
         }
 
         private void OnMessageChangeRegionOwner(MESSAGE_CHANGE_REGION_OWNER msg)
@@ -46,6 +48,22 @@ namespace JiangH.Systems
             {
                 relationDB.RemoveRelation(oldRelation);
             }
+        }
+
+        private void OnMessagePersonWillJoinInSect(MESSAGE_PERSON_WILL_JOININ_SECT msg)
+        {
+            relationDB.AddRelation(msg.person as IEntity, msg.sect as IEntity, IRelation.Label.WillJoinin);
+        }
+
+        private void OnMessagePersonJoininSect(MESSAGE_PERSON_JOININ_SECT msg)
+        {
+            var oldRelation = relationDB.Where(x => x.label == IRelation.Label.WillJoinin).SingleOrDefault(x => x.from == msg.person);
+            if (oldRelation != null)
+            {
+                relationDB.RemoveRelation(oldRelation);
+            }
+
+            relationDB.AddRelation(msg.person as IEntity, msg.sect as IEntity, IRelation.Label.Member);
         }
     }
 }

@@ -21,7 +21,7 @@ class PlayerSectData : MonoBehaviour
         sectName.text = sect == null ? "--" : sect.name;
         officeName.text = office == null ? "--" : office.name;
 
-        treasuaryButton.GetComponentInChildren<Text>().text = sect == null ? "--" : sect.treasury.current.ToString();
+        treasuaryButton.GetComponentInChildren<Text>().text = sect == null ? "--" : $"{sect.treasury.current}({sect.treasury.surplus})";
         personButton.GetComponentInChildren<Text>().text = sect == null ? "--" : sect.persons.Count().ToString();
         regionButton.GetComponentInChildren<Text>().text = sect == null ? "--" : sect.regions.Count().ToString();
     }

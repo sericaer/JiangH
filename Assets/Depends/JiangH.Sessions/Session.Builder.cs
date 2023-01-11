@@ -31,6 +31,7 @@ namespace JiangH.Sessions
                 session.systems.Add(new TreasurySystem(session.entities.SelectMany(x => x.components).OfType<ITreasury>()));
                 session.systems.Add(new RelationDBOperationSystem(session.relationDB));
                 session.systems.Add(new PlayerSystem(session));
+                session.systems.Add(new RecruitSystem(session));
 
                 BuildRelation(session);
 

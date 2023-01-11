@@ -224,7 +224,7 @@ namespace UnityUITable
             else if (index < 0)
                 return addCellInfo;
             else
-                return validColumns[index];
+                return validColumns.Where(x=>x.isShow).ElementAt(index);
         }
 
         HorizontalOrVerticalLayoutGroup _hGroup;

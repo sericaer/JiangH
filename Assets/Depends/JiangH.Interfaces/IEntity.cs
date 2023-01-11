@@ -34,6 +34,7 @@ namespace JiangH.Interfaces
             TakeOffice,
             Master,
             Member,
+            WillJoinin,
         }
     }
 

@@ -10,31 +10,21 @@ using UnityEngine.Events;
 
 class SelectPersonPanel : MonoBehaviour
 {
-    public Button confirm;
-    public Button cancel;
-
     public Table table;
     public IEnumerable<IPerson> gmData { get; set; }
 
-    public UnityEvent<IEnumerable<IPerson>> selectPersonsEvent;
+    public UnityEvent<IPerson> selectPersonEvent;
 
     public List<Item> items = new List<Item>();
 
     public void Start()
     {
+        Item.actionDoSelect = (person) =>
+        {
+            selectPersonEvent.Invoke(person);
+        };
+
         items.Clear();
-
-        confirm.onClick.AddListener(() =>
-        {
-            selectPersonsEvent.Invoke(items.Where(x => x.isSelect).Select(x=>x.person));
-        });
-
-        cancel.onClick.AddListener(() =>
-        {
-            Destroy(this.gameObject);
-        });
-
-        confirm.interactable = false;
     }
 
     public void FixedUpdate()
@@ -43,18 +33,6 @@ class SelectPersonPanel : MonoBehaviour
         foreach (var person in needAdds)
         {
             var newItem = new Item(person);
-            newItem.actionDoSelect = (flag) =>
-            {
-                if (flag)
-                {
-                    foreach (var item in items.Where(x => x != newItem))
-                    {
-                        item.isSelect = false;
-                    }
-                }
-
-                confirm.interactable = items.Any(x => x.isSelect);
-            };
 
             items.Add(newItem);
         }
@@ -68,35 +46,20 @@ class SelectPersonPanel : MonoBehaviour
 
     public void SetVaildColums(params string[] columnNames)
     {
-        table.SetVaildColumn(columnNames.Append(nameof(Item.isSelect)).ToArray());
+        table.SetVaildColumn(columnNames.Append(nameof(Item.Select)).ToArray());
     }
 
     public class Item : PersonData
     {
-        public Action<bool> actionDoSelect;
+        public static Action<IPerson> actionDoSelect;
 
-        public bool isSelect
-        {
-            get
-            {
-                return _isSelect;
-            }
-            set
-            {
-                if (_isSelect == value)
-                {
-                    return;
-                }
-
-                _isSelect = value;
-
-                actionDoSelect(value);
-            }
-        }
-
-        private bool _isSelect;
         public Item(IPerson person) : base(person)
         {
+        }
+
+        public void Select()
+        {
+            actionDoSelect(person);
         }
     }
 }

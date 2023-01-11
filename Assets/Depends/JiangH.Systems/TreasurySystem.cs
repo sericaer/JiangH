@@ -2,6 +2,7 @@
 using JiangH.Messages;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -30,20 +31,60 @@ namespace JiangH.Systems
         }
     }
 
-    public class PlayerSystem : MessageIn , ISystem
+    public class RecruitSystem : MessageInOut, ISystem
     {
-        private ISession session;
+        const int MAX_JOB_SEEKER_COUNT = 5;
 
-        public PlayerSystem(ISession session)
+        private ISession session;
+        private Random random;
+
+        public RecruitSystem(ISession session)
         {
             this.session = session;
+            this.random = new Random();
 
-            RegisterMsg<MESSAGE_CHANGE_PLAYER>(OnMessageChangePlayer);
+            RegisterMsg<MESSAGE_DATE_INC>(OnMessageDateInc);
         }
 
-        void OnMessageChangePlayer(MESSAGE_CHANGE_PLAYER msg)
+        void OnMessageDateInc(MESSAGE_DATE_INC msg)
         {
-            this.session.player = msg.newPlayer;
+            foreach (var sect in session.sects)
+            {
+                if(sect.willJoininPersons.Count() >= MAX_JOB_SEEKER_COUNT)
+                {
+                    continue;
+                }
+
+                foreach (var person in session.persons.Where(x => x.sect == null && x.willJoinInSect == null))
+                {
+                    if (!MeetRequirement(person, sect.recruitRequest))
+                    {
+                        continue;
+                    }
+
+                    var desire = CalcDWillJoinIn(person, sect);
+                    if (desire < random.Next(0, 100))
+                    {
+                        continue;
+                    }
+
+                    var msgPersonWillJoininSect = new MESSAGE_PERSON_WILL_JOININ_SECT();
+                    msgPersonWillJoininSect.person = person;
+                    msgPersonWillJoininSect.sect = sect;
+
+                    SendMessage(msgPersonWillJoininSect);
+                }
+            }
+        }
+
+        private bool MeetRequirement(IPerson person, object recruitRequest)
+        {
+            return random.Next(0, 100) > 50;
+        }
+
+        private int CalcDWillJoinIn(IPerson person, ISect sect)
+        {
+            return random.Next(0, 100);
         }
     }
 

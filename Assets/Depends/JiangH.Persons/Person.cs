@@ -17,6 +17,8 @@ namespace JiangH.Persons
 
         public IOffice office => relationsFrom.SingleOrDefault(x => x.label == IRelation.Label.Member)?.attributes.OfType<IOffice>().SingleOrDefault();
 
+        public ISect willJoinInSect => relationsFrom.SingleOrDefault(x => x.label == IRelation.Label.WillJoinin)?.to as ISect;
+
         public Person(string name)
         {
             this.name = name;

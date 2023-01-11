@@ -31,13 +31,8 @@ class RegionDetail : MonoBehaviour
             table.SetVaildColums("name");
             table.gmData = gmData.sect.persons.Where(x => x.patrolRegion == null);
 
-            table.selectPersonsEvent.AddListener((persons) =>
-            {
-                foreach(var person in persons)
-                {
-                    addPatroler.Invoke(person);
-                }
-            });
+            table.selectPersonEvent.AddListener((person) => addPatroler.Invoke(person));
+
         });
 
         removePatrolerButton.onClick.AddListener(() =>
@@ -46,13 +41,7 @@ class RegionDetail : MonoBehaviour
             table.SetVaildColums("name");
             table.gmData = gmData.patrolers;
 
-            table.selectPersonsEvent.AddListener((persons) =>
-            {
-                foreach (var person in persons)
-                {
-                    removePatroler.Invoke(person);
-                }
-            });
+            table.selectPersonEvent.AddListener((person) => removePatroler.Invoke(person));
         });
     }
 

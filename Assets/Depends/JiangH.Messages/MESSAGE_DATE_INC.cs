@@ -30,4 +30,16 @@ namespace JiangH.Messages
     {
         public IPerson newPlayer;
     }
+
+    public class MESSAGE_PERSON_WILL_JOININ_SECT : MESSAGE
+    {
+        public IPerson person;
+        public ISect sect;
+    }
+
+    public class MESSAGE_PERSON_JOININ_SECT : MESSAGE
+    {
+        public IPerson person;
+        public ISect sect;
+    }
 }

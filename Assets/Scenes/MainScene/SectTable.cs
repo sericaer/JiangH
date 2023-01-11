@@ -1,7 +1,9 @@
 ﻿using JiangH.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 class SectTable : MonoBehaviour
 {
@@ -9,8 +11,11 @@ class SectTable : MonoBehaviour
 
     public IEnumerable<ISect> gmData { get; set; }
 
+    public UnityEvent<ISect> showSectDetail;
+
     public void Start()
     {
+        SectData.actionDetail = (sect) => showSectDetail.Invoke(sect);
         sectDatas.Clear();
     }
 
@@ -36,6 +41,8 @@ class SectTable : MonoBehaviour
 
 public class SectData
 {
+    public static Action<ISect> actionDetail;
+
     public SectData(ISect sect)
     {
         this.sect = sect;
@@ -48,4 +55,9 @@ public class SectData
     public int regionCount => sect.regions.Count();
     public int treasuryCurrent => sect.treasury.current;
     public int treasurySurplus => sect.treasury.surplus;
+
+    public void OnDetail()
+    {
+        actionDetail(sect);
+    }
 }

@@ -11,18 +11,29 @@ class MainScene : MonoBehaviour
     public DateControl dateControl;
     public PlayerTopInfo playerTopInfo;
 
-    private ISession session;
+    private static ISession session;
 
     public Canvas uiCanvas;
     public SectTable prefabAllSects;
     public RegionTable prefabAllRegions;
     public PersonTable pefabTablePerson;
     public RegionDetail pefabRegionDetail;
+    public SectDetail pefabSectDetail;
+
+    public static void SendMessage(MESSAGE msg)
+    {
+        session.messageBus.SendMessage(msg);
+    }
 
     public void OnShowSects()
     {
-        var sectTable = Instantiate(prefabAllSects, UIRoot);
-        sectTable.gmData = session.sects;
+        var table = Instantiate(prefabAllSects, UIRoot);
+        table.gmData = session.sects;
+        table.showSectDetail.AddListener((sect) =>
+        {
+            var detail = Instantiate(pefabSectDetail, UIRoot);
+            detail.gmData = sect;
+        });
     }
 
     public void OnShowRegions()
@@ -42,7 +53,7 @@ class MainScene : MonoBehaviour
                     region = region
                 };
 
-                session.messageBus.SendMessage(msg);
+                SendMessage(msg);
             });
 
             detail.removePatroler.AddListener((person) =>
@@ -52,7 +63,7 @@ class MainScene : MonoBehaviour
                     patroler = person
                 };
 
-                session.messageBus.SendMessage(msg);
+                SendMessage(msg);
             });
         });
     }

@@ -28,7 +28,7 @@ namespace JiangH.Regions
             this.coordinate = coordinate;
             this.name = $"REGIN({coordinate.x},{coordinate.y})";
 
-            var productorValue = random.Next(0, 10);
+            var productorValue = random.Next(10, 20);
             this.productor = new ITreasury.ChangeSet(()=> productorValue * collectRatio / 100, () => name);
         }
     }
