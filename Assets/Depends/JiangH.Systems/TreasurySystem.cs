@@ -50,14 +50,14 @@ namespace JiangH.Systems
         {
             foreach (var sect in session.sects)
             {
-                if(sect.willJoininPersons.Count() >= MAX_JOB_SEEKER_COUNT)
-                {
-                    continue;
-                }
-
                 foreach (var person in session.persons.Where(x => x.sect == null && x.willJoinInSect == null))
                 {
-                    if (!MeetRequirement(person, sect.recruitRequest))
+                    if (sect.willJoininPersons.Count() >= MAX_JOB_SEEKER_COUNT)
+                    {
+                        break;
+                    }
+
+                    if (!MeetRegulation(person, sect.regulation))
                     {
                         continue;
                     }
@@ -73,18 +73,21 @@ namespace JiangH.Systems
                     msgPersonWillJoininSect.sect = sect;
 
                     SendMessage(msgPersonWillJoininSect);
-
-                    if (sect.willJoininPersons.Count() >= MAX_JOB_SEEKER_COUNT)
-                    {
-                        break;
-                    }
                 }
             }
         }
 
-        private bool MeetRequirement(IPerson person, object recruitRequest)
+        private bool MeetRegulation(IPerson person, ISect.IRegulation regulation)
         {
-            return random.Next(0, 100) > 50;
+            foreach (var item in regulation.groups.Select(x=>x.vaildItem))
+            {
+                if(item.RecruitLimit != null && !item.RecruitLimit(person))
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         private int CalcDWillJoinIn(IPerson person, ISect sect)
