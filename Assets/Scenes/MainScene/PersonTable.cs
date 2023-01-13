@@ -56,10 +56,10 @@ public class PersonData
     }
 
     public string name => person.name;
+
+    public string gender => person.gender.ToString();
     public string sect => person.sect != null ? person.sect.name : "--";
     public string office => person.office != null ? person.office.name : "--";
     public string salary => person.sect != null ? person.salary.value.ToString() : "--";
     public string patrolRegion => person.patrolRegion != null ? person.patrolRegion.name : "--";
-
-    private bool _isSelect;
 }

@@ -6,6 +6,8 @@ namespace JiangH.Interfaces
     {
         string name { get; }
 
+        Gender gender { get; }
+
         ISect sect { get; }
 
         IOffice office { get; }
@@ -17,6 +19,12 @@ namespace JiangH.Interfaces
         int collectAblity { get; }
 
         ISect willJoinInSect { get; }
+
+        enum Gender
+        {
+            male,
+            female
+        }
     }
 
     public interface IOffice
