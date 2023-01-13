@@ -28,16 +28,16 @@ namespace JiangH.Sects
             .Select(x => x.from)
             .OfType<IPerson>();
 
-        public ISect.IRecruitRequest recruitRequest { get; }
-
         public IEnumerable<IPerson> willJoininPersons => relationsTo.Where(x => x.label == IRelation.Label.WillJoinin)
             .Select(x => x.from)
             .OfType<IPerson>();
 
+        public ISect.IRegulation regulation { get; }
+
         public Sect(string name)
         {
             this.name = name;
-            this.recruitRequest = new RecruitRequest();
+            this.regulation = new Regulation();
 
             this.components.Add(new Treasury(random.Next(30, 100), regions.Select(x=>x.productor), persons.Select(x=>x.salary)));
         }
